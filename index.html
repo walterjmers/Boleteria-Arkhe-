@@ -44,12 +44,6 @@
     button {
       cursor: pointer;
     }
-    const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbx_QC2Tc4Fkd4b8p5aPNBuZFbSyQyiQvqwoaZpYJhPmYLDJfv-g3WIxbCiMXk-aueDcDA/exec";
-
-    /* =========================================================
-       CABECERA
-       ========================================================= */
 
     header {
       padding: 22px 20px;
@@ -94,10 +88,6 @@
       text-decoration: none;
       font-size: 14px;
     }
-
-    /* =========================================================
-       HERO
-       ========================================================= */
 
     .hero {
       min-height: 420px;
@@ -152,10 +142,6 @@
     .btn-principal:hover {
       background: var(--dorado-claro);
     }
-
-    /* =========================================================
-       CARTELERA
-       ========================================================= */
 
     main {
       width: min(1150px, calc(100% - 32px));
@@ -268,10 +254,6 @@
       font-weight: bold;
     }
 
-    /* =========================================================
-       MODAL / FORMULARIO
-       ========================================================= */
-
     .modal {
       display: none;
       position: fixed;
@@ -354,12 +336,6 @@
       border-color: var(--dorado);
     }
 
-    .fila {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
     .cantidad-control {
       display: grid;
       grid-template-columns: 50px 1fr 50px;
@@ -433,13 +409,10 @@
       font-weight: bold;
     }
 
-    .boton-pago:hover {
-      background: var(--dorado-claro);
+    .boton-pago:disabled {
+      opacity: .6;
+      cursor: wait;
     }
-
-    /* =========================================================
-       RESULTADO
-       ========================================================= */
 
     #resultadoCompra {
       display: none;
@@ -454,6 +427,7 @@
     #resultadoCompra .icono {
       font-size: 45px;
       margin-bottom: 10px;
+      color: #6fd56f;
     }
 
     #resultadoCompra h3 {
@@ -498,10 +472,6 @@
       .hero {
         min-height: 360px;
         padding: 55px 20px;
-      }
-
-      .fila {
-        grid-template-columns: 1fr;
       }
 
       .afiche {
@@ -576,10 +546,6 @@
 </footer>
 
 
-<!-- =========================================================
-     MODAL DE COMPRA
-     ========================================================= -->
-
 <div class="modal" id="modalCompra">
 
   <div class="modal-caja">
@@ -609,9 +575,7 @@
 
         <div class="cantidad-control">
 
-          <button type="button" onclick="cambiarCantidad(-1)">
-            −
-          </button>
+          <button type="button" onclick="cambiarCantidad(-1)">−</button>
 
           <input
             id="cantidad"
@@ -621,9 +585,7 @@
             value="1"
             readonly>
 
-          <button type="button" onclick="cambiarCantidad(1)">
-            +
-          </button>
+          <button type="button" onclick="cambiarCantidad(1)">+</button>
 
         </div>
       </div>
@@ -706,17 +668,21 @@
 
       <div class="icono">✓</div>
 
-      <h3>Orden preparada</h3>
+      <h3>Orden creada</h3>
 
       <p>
-        La información fue validada correctamente.
+        La orden fue registrada correctamente.
       </p>
 
       <div class="id-orden" id="ordenGenerada"></div>
 
       <p>
-        En la próxima etapa este botón te redirigirá
-        automáticamente al sistema de pago de Bancard.
+        Estado: <strong>PENDIENTE</strong>
+      </p>
+
+      <p>
+        En la siguiente etapa conectaremos esta orden
+        con el sistema de pago de Bancard.
       </p>
 
       <button class="btn-principal" onclick="cerrarCompra()">
@@ -732,12 +698,9 @@
 
 <script>
 
-  // ============================================================
-  // CONFIGURACIÓN DE OBRAS
-  //
-  // ESTA ES LA PARTE QUE MODIFICAREMOS PARA AGREGAR
-  // NUEVAS PRODUCCIONES.
-  // ============================================================
+  const APPS_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbx_QC2Tc4Fkd4b8p5aPNBuZFbSyQyiQvqwoaZpYJhPmYLDJfv-g3WIxbCiMXk-aueDcDA/exec";
+
 
   const OBRAS = [
 
@@ -752,8 +715,6 @@
 
       precio: 75000,
 
-      // Cuando subas una imagen al repositorio:
-      // imagen: "piedra-bruta.jpg"
       imagen: "",
 
       funciones: [
@@ -764,17 +725,9 @@
   ];
 
 
-  // ============================================================
-  // VARIABLES
-  // ============================================================
-
   let obraActual = null;
   let cantidadActual = 1;
 
-
-  // ============================================================
-  // FORMATEAR GUARANÍES
-  // ============================================================
 
   function guaranies(numero) {
 
@@ -783,10 +736,6 @@
 
   }
 
-
-  // ============================================================
-  // MOSTRAR CARTELERA
-  // ============================================================
 
   function cargarCartelera() {
 
@@ -877,10 +826,6 @@
   }
 
 
-  // ============================================================
-  // ABRIR FORMULARIO
-  // ============================================================
-
   function abrirCompra(idObra) {
 
     obraActual =
@@ -956,10 +901,6 @@
   }
 
 
-  // ============================================================
-  // CERRAR FORMULARIO
-  // ============================================================
-
   function cerrarCompra() {
 
     document.getElementById(
@@ -979,10 +920,6 @@
 
   }
 
-
-  // ============================================================
-  // CAMBIAR CANTIDAD
-  // ============================================================
 
   function cambiarCantidad(cambio) {
 
@@ -1009,10 +946,6 @@
 
   }
 
-
-  // ============================================================
-  // ACTUALIZAR TOTAL
-  // ============================================================
 
   function actualizarTotal() {
 
@@ -1047,60 +980,6 @@
 
   }
 
-
-  // ============================================================
-  // GENERAR REFERENCIA TEMPORAL DE ORDEN
-  //
-  // ATENCIÓN:
-  // Esta referencia todavía NO es una orden bancaria real.
-  // Cuando conectemos el backend, el ID se generará en servidor.
-  // ============================================================
-
-  function generarIdTemporal() {
-
-    const ahora = new Date();
-
-
-    const fecha =
-      ahora
-        .getFullYear()
-        .toString() +
-
-      String(
-        ahora.getMonth() + 1
-      ).padStart(2, "0") +
-
-      String(
-        ahora.getDate()
-      ).padStart(2, "0");
-
-
-    const aleatorio =
-      Math.floor(
-        Math.random() * 90000
-      ) + 10000;
-
-
-    return (
-      "ARKHE-" +
-      fecha +
-      "-" +
-      aleatorio
-    );
-
-  }
-
-
-  // ============================================================
-  // PROCESAR FORMULARIO
-  //
-  // POR AHORA:
-  // Solo valida y muestra la orden.
-  //
-  // DESPUÉS:
-  // Acá enviaremos la información a nuestro backend,
-  // que creará la orden y solicitará el enlace a Bancard.
-  // ============================================================
 
   document
     .getElementById("formCompra")
@@ -1161,9 +1040,6 @@
 
         const orden = {
 
-          id:
-            generarIdTemporal(),
-
           obra:
             obraActual.id,
 
@@ -1174,13 +1050,6 @@
             funcion,
 
           cantidad:
-            cantidadActual,
-
-          precioUnitario:
-            obraActual.precio,
-
-          total:
-            obraActual.precio *
             cantidadActual,
 
           nombre:
@@ -1195,37 +1064,103 @@
         };
 
 
-        console.log(
-          "ORDEN DE PRUEBA:",
-          orden
-        );
+        const botonPago =
+          document.querySelector(
+            ".boton-pago"
+          );
 
 
-        document.getElementById(
-          "ordenGenerada"
-        ).textContent =
-          orden.id;
+        botonPago.disabled = true;
+
+        botonPago.textContent =
+          "CREANDO ORDEN...";
 
 
-        document.getElementById(
-          "formCompra"
-        ).style.display =
-          "none";
+        fetch(
+          APPS_SCRIPT_URL,
+          {
+
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+
+            body:
+              JSON.stringify(orden)
+
+          }
+        )
+
+        .then(function(response) {
+
+          if (!response.ok) {
+            throw new Error(
+              "Error HTTP " +
+              response.status
+            );
+          }
+
+          return response.json();
+
+        })
+
+        .then(function(data) {
+
+          if (!data.ok) {
+
+            throw new Error(
+              data.error ||
+              "No se pudo crear la orden"
+            );
+
+          }
 
 
-        document.getElementById(
-          "resultadoCompra"
-        ).classList.add(
-          "activo"
-        );
+          document.getElementById(
+            "ordenGenerada"
+          ).textContent =
+            data.idOrden;
+
+
+          document.getElementById(
+            "formCompra"
+          ).style.display =
+            "none";
+
+
+          document.getElementById(
+            "resultadoCompra"
+          ).classList.add(
+            "activo"
+          );
+
+        })
+
+        .catch(function(error) {
+
+          console.error(error);
+
+          alert(
+            "Hubo un problema al crear la orden. " +
+            "Intentá nuevamente."
+          );
+
+        })
+
+        .finally(function() {
+
+          botonPago.disabled = false;
+
+          botonPago.textContent =
+            "CONTINUAR AL PAGO";
+
+        });
 
       }
     );
 
-
-  // ============================================================
-  // CERRAR SI SE TOCA FUERA DE LA VENTANA
-  // ============================================================
 
   document
     .getElementById("modalCompra")
@@ -1244,10 +1179,6 @@
       }
     );
 
-
-  // ============================================================
-  // INICIAR
-  // ============================================================
 
   cargarCartelera();
 
