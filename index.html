@@ -1,1 +1,1255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Boletería | Arkhé en Escena</title>
+
+  <style>
+    :root {
+      --fondo: #0d0d0d;
+      --fondo-secundario: #171717;
+      --tarjeta: #1d1d1d;
+      --borde: #343434;
+      --texto: #f5f1e8;
+      --texto-suave: #aaa59a;
+      --dorado: #c59a56;
+      --dorado-claro: #e4c48c;
+      --verde: #2e7d32;
+      --rojo: #b3261e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       CABECERA
+       ========================================================= */
+
+    header {
+      padding: 22px 20px;
+      border-bottom: 1px solid var(--borde);
+      background: rgba(13, 13, 13, 0.96);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-inner {
+      width: min(1150px, 100%);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .marca {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .marca strong {
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 2px;
+      font-size: 21px;
+      color: var(--dorado-claro);
+    }
+
+    .marca span {
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--texto-suave);
+      text-transform: uppercase;
+    }
+
+    nav a {
+      color: var(--texto);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 70px 20px;
+      background:
+        radial-gradient(circle at center, rgba(197,154,86,.17), transparent 42%),
+        linear-gradient(180deg, #111, #0d0d0d);
+      text-align: center;
+    }
+
+    .hero-contenido {
+      max-width: 780px;
+    }
+
+    .sobrelinea {
+      text-transform: uppercase;
+      color: var(--dorado);
+      letter-spacing: 4px;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(42px, 8vw, 78px);
+      font-weight: normal;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 22px auto 0;
+      color: var(--texto-suave);
+      line-height: 1.6;
+      font-size: 17px;
+    }
+
+    .btn-principal {
+      margin-top: 30px;
+      border: 0;
+      padding: 15px 25px;
+      border-radius: 8px;
+      background: var(--dorado);
+      color: #111;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .btn-principal:hover {
+      background: var(--dorado-claro);
+    }
+
+    /* =========================================================
+       CARTELERA
+       ========================================================= */
+
+    main {
+      width: min(1150px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    .seccion {
+      padding: 65px 0;
+    }
+
+    .titulo-seccion {
+      margin-bottom: 30px;
+    }
+
+    .titulo-seccion span {
+      display: block;
+      text-transform: uppercase;
+      color: var(--dorado);
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .titulo-seccion h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      font-weight: normal;
+    }
+
+    .grid-obras {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 25px;
+    }
+
+    .obra {
+      background: var(--tarjeta);
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .obra:hover {
+      transform: translateY(-4px);
+      border-color: var(--dorado);
+    }
+
+    .afiche {
+      height: 370px;
+      width: 100%;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(197,154,86,.35), transparent 30%),
+        linear-gradient(145deg, #333, #0b0b0b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .afiche img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .afiche-placeholder {
+      padding: 25px;
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      color: var(--dorado-claro);
+    }
+
+    .obra-contenido {
+      padding: 22px;
+    }
+
+    .obra-contenido h3 {
+      margin: 0 0 8px;
+      font-size: 26px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: normal;
+    }
+
+    .obra-meta {
+      color: var(--texto-suave);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .obra-precio {
+      margin-top: 18px;
+      color: var(--dorado-claro);
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .obra-boton {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--dorado);
+      border: none;
+      color: #111;
+      font-weight: bold;
+    }
+
+    /* =========================================================
+       MODAL / FORMULARIO
+       ========================================================= */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .82);
+      z-index: 100;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal.activo {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .modal-caja {
+      width: min(650px, 100%);
+      background: var(--fondo-secundario);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      margin: 30px 0;
+      overflow: hidden;
+    }
+
+    .modal-cabecera {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 24px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .modal-cabecera h2 {
+      margin: 5px 0 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 30px;
+      font-weight: normal;
+    }
+
+    .cerrar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--borde);
+      background: #222;
+      color: white;
+      font-size: 22px;
+    }
+
+    form {
+      padding: 24px;
+    }
+
+    .campo {
+      margin-bottom: 19px;
+    }
+
+    .campo label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .campo input,
+    .campo select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--borde);
+      background: #101010;
+      color: white;
+      outline: none;
+    }
+
+    .campo input:focus,
+    .campo select:focus {
+      border-color: var(--dorado);
+    }
+
+    .fila {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .cantidad-control {
+      display: grid;
+      grid-template-columns: 50px 1fr 50px;
+      gap: 8px;
+    }
+
+    .cantidad-control button {
+      border: 1px solid var(--borde);
+      background: #292929;
+      color: white;
+      border-radius: 8px;
+      font-size: 22px;
+    }
+
+    #cantidad {
+      text-align: center;
+    }
+
+    .resumen {
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      padding: 18px;
+      margin: 25px 0;
+      background: #111;
+    }
+
+    .resumen-linea {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin: 9px 0;
+      color: var(--texto-suave);
+    }
+
+    .resumen-total {
+      border-top: 1px solid var(--borde);
+      padding-top: 15px;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .resumen-total strong:last-child {
+      font-size: 26px;
+      color: var(--dorado-claro);
+    }
+
+    .terminos {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--texto-suave);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+
+    .terminos input {
+      margin-top: 3px;
+    }
+
+    .boton-pago {
+      width: 100%;
+      padding: 16px;
+      background: var(--dorado);
+      color: #111;
+      border: none;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .boton-pago:hover {
+      background: var(--dorado-claro);
+    }
+
+    /* =========================================================
+       RESULTADO
+       ========================================================= */
+
+    #resultadoCompra {
+      display: none;
+      padding: 26px;
+      text-align: center;
+    }
+
+    #resultadoCompra.activo {
+      display: block;
+    }
+
+    #resultadoCompra .icono {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    #resultadoCompra h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 30px;
+      margin: 0 0 12px;
+    }
+
+    #resultadoCompra p {
+      color: var(--texto-suave);
+      line-height: 1.6;
+    }
+
+    .id-orden {
+      display: inline-block;
+      background: #111;
+      border: 1px solid var(--borde);
+      border-radius: 8px;
+      padding: 11px 15px;
+      margin: 10px 0;
+      color: var(--dorado-claro);
+      font-family: monospace;
+    }
+
+    footer {
+      border-top: 1px solid var(--borde);
+      padding: 35px 20px;
+      text-align: center;
+      color: var(--texto-suave);
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        position: static;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        min-height: 360px;
+        padding: 55px 20px;
+      }
+
+      .fila {
+        grid-template-columns: 1fr;
+      }
+
+      .afiche {
+        height: 430px;
+      }
+
+      .modal {
+        padding: 8px;
+      }
+
+      .modal-caja {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="marca">
+      <strong>ARKHÉ</strong>
+      <span>En Escena</span>
+    </div>
+
+    <nav>
+      <a href="#cartelera">Cartelera</a>
+    </nav>
+  </div>
+</header>
+
+
+<section class="hero">
+  <div class="hero-contenido">
+    <div class="sobrelinea">Boletería oficial</div>
+
+    <h1>Historias para vivir en escena.</h1>
+
+    <p>
+      Comprá tus entradas para las producciones de Arkhé en Escena
+      desde nuestra boletería oficial.
+    </p>
+
+    <button
+      class="btn-principal"
+      onclick="document.getElementById('cartelera').scrollIntoView()">
+      Ver cartelera
+    </button>
+  </div>
+</section>
+
+
+<main>
+
+  <section class="seccion" id="cartelera">
+
+    <div class="titulo-seccion">
+      <span>Temporada</span>
+      <h2>Cartelera</h2>
+    </div>
+
+    <div class="grid-obras" id="listaObras"></div>
+
+  </section>
+
+</main>
+
+
+<footer>
+  © 2026 Arkhé en Escena E.A.S. · Boletería oficial
+</footer>
+
+
+<!-- =========================================================
+     MODAL DE COMPRA
+     ========================================================= -->
+
+<div class="modal" id="modalCompra">
+
+  <div class="modal-caja">
+
+    <div class="modal-cabecera">
+
+      <div>
+        <div class="sobrelinea">Comprar entradas</div>
+        <h2 id="modalTitulo"></h2>
+      </div>
+
+      <button class="cerrar" onclick="cerrarCompra()">×</button>
+
+    </div>
+
+
+    <form id="formCompra">
+
+      <div class="campo">
+        <label for="funcion">Función</label>
+        <select id="funcion" required></select>
+      </div>
+
+
+      <div class="campo">
+        <label>Cantidad de entradas</label>
+
+        <div class="cantidad-control">
+
+          <button type="button" onclick="cambiarCantidad(-1)">
+            −
+          </button>
+
+          <input
+            id="cantidad"
+            type="number"
+            min="1"
+            max="10"
+            value="1"
+            readonly>
+
+          <button type="button" onclick="cambiarCantidad(1)">
+            +
+          </button>
+
+        </div>
+      </div>
+
+
+      <div class="campo">
+        <label for="nombre">Nombre y apellido</label>
+
+        <input
+          id="nombre"
+          type="text"
+          autocomplete="name"
+          placeholder="Ej.: Walter Mereles"
+          required>
+      </div>
+
+
+      <div class="campo">
+        <label for="correo">Correo electrónico</label>
+
+        <input
+          id="correo"
+          type="email"
+          autocomplete="email"
+          placeholder="correo@ejemplo.com"
+          required>
+      </div>
+
+
+      <div class="campo">
+        <label for="whatsapp">WhatsApp</label>
+
+        <input
+          id="whatsapp"
+          type="tel"
+          autocomplete="tel"
+          placeholder="0981 000 000"
+          required>
+      </div>
+
+
+      <div class="resumen">
+
+        <div class="resumen-linea">
+          <span>Precio unitario</span>
+          <strong id="precioUnitario"></strong>
+        </div>
+
+        <div class="resumen-linea">
+          <span>Cantidad</span>
+          <strong id="resumenCantidad">1</strong>
+        </div>
+
+        <div class="resumen-total">
+          <strong>Total</strong>
+          <strong id="totalCompra"></strong>
+        </div>
+
+      </div>
+
+
+      <label class="terminos">
+        <input id="acepto" type="checkbox" required>
+
+        <span>
+          Confirmo que los datos ingresados son correctos y
+          acepto las condiciones de compra de Arkhé en Escena.
+        </span>
+      </label>
+
+
+      <button class="boton-pago" type="submit">
+        CONTINUAR AL PAGO
+      </button>
+
+    </form>
+
+
+    <div id="resultadoCompra">
+
+      <div class="icono">✓</div>
+
+      <h3>Orden preparada</h3>
+
+      <p>
+        La información fue validada correctamente.
+      </p>
+
+      <div class="id-orden" id="ordenGenerada"></div>
+
+      <p>
+        En la próxima etapa este botón te redirigirá
+        automáticamente al sistema de pago de Bancard.
+      </p>
+
+      <button class="btn-principal" onclick="cerrarCompra()">
+        Volver a la cartelera
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  // ============================================================
+  // CONFIGURACIÓN DE OBRAS
+  //
+  // ESTA ES LA PARTE QUE MODIFICAREMOS PARA AGREGAR
+  // NUEVAS PRODUCCIONES.
+  // ============================================================
+
+  const OBRAS = [
+
+    {
+      id: "piedra-bruta",
+
+      titulo: "La Piedra Bruta",
+
+      lugar: "Alianza Francesa",
+
+      hora: "20:30",
+
+      precio: 75000,
+
+      // Cuando subas una imagen al repositorio:
+      // imagen: "piedra-bruta.jpg"
+      imagen: "",
+
+      funciones: [
+        "Próxima función – Fecha a confirmar"
+      ]
+    }
+
+  ];
+
+
+  // ============================================================
+  // VARIABLES
+  // ============================================================
+
+  let obraActual = null;
+  let cantidadActual = 1;
+
+
+  // ============================================================
+  // FORMATEAR GUARANÍES
+  // ============================================================
+
+  function guaranies(numero) {
+
+    return "G. " +
+      Number(numero).toLocaleString("es-PY");
+
+  }
+
+
+  // ============================================================
+  // MOSTRAR CARTELERA
+  // ============================================================
+
+  function cargarCartelera() {
+
+    const contenedor =
+      document.getElementById("listaObras");
+
+    contenedor.innerHTML = "";
+
+
+    OBRAS.forEach(function(obra) {
+
+      const tarjeta =
+        document.createElement("article");
+
+      tarjeta.className = "obra";
+
+
+      let afiche;
+
+
+      if (obra.imagen) {
+
+        afiche =
+          '<div class="afiche">' +
+            '<img src="' +
+            obra.imagen +
+            '" alt="' +
+            obra.titulo +
+            '">' +
+          '</div>';
+
+      } else {
+
+        afiche =
+          '<div class="afiche">' +
+            '<div class="afiche-placeholder">' +
+              obra.titulo +
+            '</div>' +
+          '</div>';
+
+      }
+
+
+      tarjeta.innerHTML =
+
+        afiche +
+
+        '<div class="obra-contenido">' +
+
+          '<h3>' +
+          obra.titulo +
+          '</h3>' +
+
+          '<div class="obra-meta">' +
+            obra.lugar +
+            '<br>' +
+            obra.hora +
+            ' h' +
+          '</div>' +
+
+          '<div class="obra-precio">' +
+            guaranies(obra.precio) +
+          '</div>' +
+
+          '<button class="obra-boton">' +
+            'COMPRAR ENTRADAS' +
+          '</button>' +
+
+        '</div>';
+
+
+      tarjeta
+        .querySelector(".obra-boton")
+        .addEventListener(
+          "click",
+          function() {
+
+            abrirCompra(obra.id);
+
+          }
+        );
+
+
+      contenedor.appendChild(tarjeta);
+
+    });
+
+  }
+
+
+  // ============================================================
+  // ABRIR FORMULARIO
+  // ============================================================
+
+  function abrirCompra(idObra) {
+
+    obraActual =
+      OBRAS.find(
+        function(obra) {
+          return obra.id === idObra;
+        }
+      );
+
+
+    if (!obraActual) {
+      return;
+    }
+
+
+    cantidadActual = 1;
+
+
+    document.getElementById(
+      "modalTitulo"
+    ).textContent =
+      obraActual.titulo;
+
+
+    const selector =
+      document.getElementById("funcion");
+
+
+    selector.innerHTML = "";
+
+
+    obraActual.funciones.forEach(
+      function(funcion) {
+
+        const opcion =
+          document.createElement("option");
+
+        opcion.value = funcion;
+        opcion.textContent = funcion;
+
+        selector.appendChild(opcion);
+
+      }
+    );
+
+
+    document.getElementById(
+      "cantidad"
+    ).value = 1;
+
+
+    document.getElementById(
+      "formCompra"
+    ).style.display = "block";
+
+
+    document.getElementById(
+      "resultadoCompra"
+    ).classList.remove("activo");
+
+
+    actualizarTotal();
+
+
+    document.getElementById(
+      "modalCompra"
+    ).classList.add("activo");
+
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
+
+
+  // ============================================================
+  // CERRAR FORMULARIO
+  // ============================================================
+
+  function cerrarCompra() {
+
+    document.getElementById(
+      "modalCompra"
+    ).classList.remove("activo");
+
+
+    document.body.style.overflow = "";
+
+
+    document.getElementById(
+      "formCompra"
+    ).reset();
+
+
+    cantidadActual = 1;
+
+  }
+
+
+  // ============================================================
+  // CAMBIAR CANTIDAD
+  // ============================================================
+
+  function cambiarCantidad(cambio) {
+
+    cantidadActual += cambio;
+
+
+    if (cantidadActual < 1) {
+      cantidadActual = 1;
+    }
+
+
+    if (cantidadActual > 10) {
+      cantidadActual = 10;
+    }
+
+
+    document.getElementById(
+      "cantidad"
+    ).value =
+      cantidadActual;
+
+
+    actualizarTotal();
+
+  }
+
+
+  // ============================================================
+  // ACTUALIZAR TOTAL
+  // ============================================================
+
+  function actualizarTotal() {
+
+    if (!obraActual) {
+      return;
+    }
+
+
+    const total =
+      obraActual.precio *
+      cantidadActual;
+
+
+    document.getElementById(
+      "precioUnitario"
+    ).textContent =
+      guaranies(
+        obraActual.precio
+      );
+
+
+    document.getElementById(
+      "resumenCantidad"
+    ).textContent =
+      cantidadActual;
+
+
+    document.getElementById(
+      "totalCompra"
+    ).textContent =
+      guaranies(total);
+
+  }
+
+
+  // ============================================================
+  // GENERAR REFERENCIA TEMPORAL DE ORDEN
+  //
+  // ATENCIÓN:
+  // Esta referencia todavía NO es una orden bancaria real.
+  // Cuando conectemos el backend, el ID se generará en servidor.
+  // ============================================================
+
+  function generarIdTemporal() {
+
+    const ahora = new Date();
+
+
+    const fecha =
+      ahora
+        .getFullYear()
+        .toString() +
+
+      String(
+        ahora.getMonth() + 1
+      ).padStart(2, "0") +
+
+      String(
+        ahora.getDate()
+      ).padStart(2, "0");
+
+
+    const aleatorio =
+      Math.floor(
+        Math.random() * 90000
+      ) + 10000;
+
+
+    return (
+      "ARKHE-" +
+      fecha +
+      "-" +
+      aleatorio
+    );
+
+  }
+
+
+  // ============================================================
+  // PROCESAR FORMULARIO
+  //
+  // POR AHORA:
+  // Solo valida y muestra la orden.
+  //
+  // DESPUÉS:
+  // Acá enviaremos la información a nuestro backend,
+  // que creará la orden y solicitará el enlace a Bancard.
+  // ============================================================
+
+  document
+    .getElementById("formCompra")
+    .addEventListener(
+      "submit",
+      function(event) {
+
+        event.preventDefault();
+
+
+        if (!obraActual) {
+          return;
+        }
+
+
+        const nombre =
+          document
+            .getElementById("nombre")
+            .value
+            .trim();
+
+
+        const correo =
+          document
+            .getElementById("correo")
+            .value
+            .trim();
+
+
+        const whatsapp =
+          document
+            .getElementById("whatsapp")
+            .value
+            .trim();
+
+
+        const funcion =
+          document
+            .getElementById("funcion")
+            .value;
+
+
+        if (
+          !nombre ||
+          !correo ||
+          !whatsapp ||
+          !funcion
+        ) {
+
+          alert(
+            "Completá todos los datos antes de continuar."
+          );
+
+          return;
+
+        }
+
+
+        const orden = {
+
+          id:
+            generarIdTemporal(),
+
+          obra:
+            obraActual.id,
+
+          titulo:
+            obraActual.titulo,
+
+          funcion:
+            funcion,
+
+          cantidad:
+            cantidadActual,
+
+          precioUnitario:
+            obraActual.precio,
+
+          total:
+            obraActual.precio *
+            cantidadActual,
+
+          nombre:
+            nombre,
+
+          correo:
+            correo,
+
+          whatsapp:
+            whatsapp
+
+        };
+
+
+        console.log(
+          "ORDEN DE PRUEBA:",
+          orden
+        );
+
+
+        document.getElementById(
+          "ordenGenerada"
+        ).textContent =
+          orden.id;
+
+
+        document.getElementById(
+          "formCompra"
+        ).style.display =
+          "none";
+
+
+        document.getElementById(
+          "resultadoCompra"
+        ).classList.add(
+          "activo"
+        );
+
+      }
+    );
+
+
+  // ============================================================
+  // CERRAR SI SE TOCA FUERA DE LA VENTANA
+  // ============================================================
+
+  document
+    .getElementById("modalCompra")
+    .addEventListener(
+      "click",
+      function(event) {
+
+        if (
+          event.target === this
+        ) {
+
+          cerrarCompra();
+
+        }
+
+      }
+    );
+
+
+  // ============================================================
+  // INICIAR
+  // ============================================================
+
+  cargarCartelera();
+
+</script>
+
+</body>
+</html>
