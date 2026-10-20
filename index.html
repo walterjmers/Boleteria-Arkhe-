@@ -1,541 +1,1225 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Boletería | Arkhé en Escena</title>
 
+
+  <!-- ===================================================== -->
+  <!-- BANCARD VPOS - STAGING                                -->
+  <!-- Cuando pasemos a producción cambiaremos esta URL      -->
+  <!-- ===================================================== -->
+
+  <script
+    src="https://vpos.infonet.com.py:8888/checkout/javascript/dist/bancard-checkout-4.0.0.js">
+  </script>
+
+
   <style>
+
     :root {
+
       --fondo: #0d0d0d;
       --fondo-secundario: #171717;
       --tarjeta: #1d1d1d;
       --borde: #343434;
+
       --texto: #f5f1e8;
       --texto-suave: #aaa59a;
+
       --dorado: #c59a56;
       --dorado-claro: #e4c48c;
+
       --verde: #2e7d32;
       --rojo: #b3261e;
+
     }
+
 
     * {
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
+
       margin: 0;
+
       background: var(--fondo);
+
       color: var(--texto);
-      font-family: Arial, Helvetica, sans-serif;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     }
+
 
     button,
     input,
     select {
+
       font: inherit;
+
     }
+
 
     button {
+
       cursor: pointer;
+
     }
+
+
+    /* ===================================================== */
+    /* HEADER                                                */
+    /* ===================================================== */
 
     header {
-      padding: 22px 20px;
-      border-bottom: 1px solid var(--borde);
-      background: rgba(13, 13, 13, 0.96);
+
+      padding: 20px;
+
+      border-bottom:
+        1px solid var(--borde);
+
+      background:
+        rgba(13,13,13,.97);
+
       position: sticky;
+
       top: 0;
+
       z-index: 50;
+
     }
+
 
     .header-inner {
-      width: min(1150px, 100%);
+
+      width:
+        min(1150px,100%);
+
       margin: auto;
+
       display: flex;
+
       align-items: center;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       gap: 20px;
+
     }
+
 
     .marca {
+
       display: flex;
-      flex-direction: column;
-      gap: 3px;
+
+      flex-direction: row;
+
+      align-items: center;
+
+      gap: 12px;
+
     }
+
+
+    .marca img {
+
+      width: 50px;
+
+      height: 50px;
+
+      object-fit: contain;
+
+    }
+
+
+    .marca-texto {
+
+      display: flex;
+
+      flex-direction: column;
+
+    }
+
 
     .marca strong {
-      font-family: Georgia, "Times New Roman", serif;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
       letter-spacing: 2px;
+
       font-size: 21px;
-      color: var(--dorado-claro);
+
+      color:
+        var(--dorado-claro);
+
     }
+
 
     .marca span {
-      font-size: 12px;
+
+      font-size: 11px;
+
       letter-spacing: 3px;
-      color: var(--texto-suave);
-      text-transform: uppercase;
+
+      color:
+        var(--texto-suave);
+
+      text-transform:
+        uppercase;
+
     }
 
-    nav a {
-      color: var(--texto);
-      text-decoration: none;
-      font-size: 14px;
-    }
+
+    /* ===================================================== */
+    /* HERO                                                  */
+    /* ===================================================== */
 
     .hero {
+
       min-height: 420px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
-      padding: 70px 20px;
+
+      padding:
+        70px 20px;
+
       background:
-        radial-gradient(circle at center, rgba(197,154,86,.17), transparent 42%),
-        linear-gradient(180deg, #111, #0d0d0d);
+
+        radial-gradient(
+          circle at center,
+          rgba(197,154,86,.17),
+          transparent 42%
+        ),
+
+        linear-gradient(
+          180deg,
+          #111,
+          #0d0d0d
+        );
+
       text-align: center;
+
     }
+
 
     .hero-contenido {
+
       max-width: 780px;
+
     }
+
 
     .sobrelinea {
-      text-transform: uppercase;
-      color: var(--dorado);
+
+      text-transform:
+        uppercase;
+
+      color:
+        var(--dorado);
+
       letter-spacing: 4px;
+
       font-size: 12px;
+
       margin-bottom: 18px;
+
     }
+
 
     .hero h1 {
+
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(42px, 8vw, 78px);
-      font-weight: normal;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          42px,
+          8vw,
+          78px
+        );
+
+      font-weight:
+        normal;
+
     }
+
 
     .hero p {
-      max-width: 600px;
-      margin: 22px auto 0;
-      color: var(--texto-suave);
+
+      max-width: 650px;
+
+      margin:
+        22px auto 0;
+
+      color:
+        var(--texto-suave);
+
       line-height: 1.6;
+
       font-size: 17px;
+
     }
+
 
     .btn-principal {
+
       margin-top: 30px;
+
       border: 0;
-      padding: 15px 25px;
+
+      padding:
+        15px 25px;
+
       border-radius: 8px;
-      background: var(--dorado);
+
+      background:
+        var(--dorado);
+
       color: #111;
+
       font-weight: bold;
+
       font-size: 16px;
+
     }
+
 
     .btn-principal:hover {
-      background: var(--dorado-claro);
+
+      background:
+        var(--dorado-claro);
+
     }
+
+
+    /* ===================================================== */
+    /* CARTELERA                                             */
+    /* ===================================================== */
 
     main {
-      width: min(1150px, calc(100% - 32px));
+
+      width:
+        min(
+          1150px,
+          calc(100% - 32px)
+        );
+
       margin: auto;
+
     }
+
 
     .seccion {
-      padding: 65px 0;
+
+      padding:
+        65px 0;
+
     }
+
 
     .titulo-seccion {
+
       margin-bottom: 30px;
+
     }
+
 
     .titulo-seccion span {
+
       display: block;
-      text-transform: uppercase;
-      color: var(--dorado);
+
+      text-transform:
+        uppercase;
+
+      color:
+        var(--dorado);
+
       font-size: 11px;
+
       letter-spacing: 3px;
+
       margin-bottom: 8px;
+
     }
+
 
     .titulo-seccion h2 {
+
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
       font-size: 38px;
-      font-weight: normal;
+
+      font-weight:
+        normal;
+
     }
+
 
     .grid-obras {
+
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(270px,1fr)
+        );
+
       gap: 25px;
+
     }
+
 
     .obra {
-      background: var(--tarjeta);
-      border: 1px solid var(--borde);
+
+      background:
+        var(--tarjeta);
+
+      border:
+        1px solid var(--borde);
+
       border-radius: 14px;
+
       overflow: hidden;
-      transition: transform .2s ease, border-color .2s ease;
+
+      transition:
+        transform .2s ease,
+        border-color .2s ease;
+
+      max-width: 450px;
+
     }
+
 
     .obra:hover {
-      transform: translateY(-4px);
-      border-color: var(--dorado);
+
+      transform:
+        translateY(-4px);
+
+      border-color:
+        var(--dorado);
+
     }
+
 
     .afiche {
-      height: 370px;
+
+      height: 520px;
+
       width: 100%;
+
       background:
-        radial-gradient(circle at 50% 35%, rgba(197,154,86,.35), transparent 30%),
-        linear-gradient(145deg, #333, #0b0b0b);
+
+        radial-gradient(
+          circle at 50% 35%,
+          rgba(197,154,86,.30),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          145deg,
+          #333,
+          #0b0b0b
+        );
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       overflow: hidden;
-      position: relative;
+
     }
+
 
     .afiche img {
+
       width: 100%;
+
       height: 100%;
+
       object-fit: cover;
+
       display: block;
+
     }
+
 
     .afiche-placeholder {
+
       padding: 25px;
+
       text-align: center;
-      font-family: Georgia, "Times New Roman", serif;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
       font-size: 34px;
-      color: var(--dorado-claro);
+
+      color:
+        var(--dorado-claro);
+
     }
+
 
     .obra-contenido {
+
       padding: 22px;
+
     }
+
 
     .obra-contenido h3 {
-      margin: 0 0 8px;
-      font-size: 26px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: normal;
+
+      margin:
+        0 0 8px;
+
+      font-size: 27px;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-weight:
+        normal;
+
     }
+
 
     .obra-meta {
-      color: var(--texto-suave);
+
+      color:
+        var(--texto-suave);
+
       font-size: 14px;
-      line-height: 1.6;
+
+      line-height: 1.7;
+
     }
+
 
     .obra-precio {
+
       margin-top: 18px;
-      color: var(--dorado-claro);
+
+      color:
+        var(--dorado-claro);
+
       font-size: 22px;
+
       font-weight: bold;
+
     }
+
 
     .obra-boton {
+
       width: 100%;
+
       margin-top: 20px;
+
       padding: 14px;
+
       border-radius: 8px;
-      background: var(--dorado);
+
+      background:
+        var(--dorado);
+
       border: none;
+
       color: #111;
+
       font-weight: bold;
+
     }
+
+
+    /* ===================================================== */
+    /* MODAL                                                 */
+    /* ===================================================== */
 
     .modal {
+
       display: none;
+
       position: fixed;
+
       inset: 0;
-      background: rgba(0, 0, 0, .82);
+
+      background:
+        rgba(0,0,0,.86);
+
       z-index: 100;
+
       padding: 20px;
+
       overflow-y: auto;
+
     }
+
 
     .modal.activo {
+
       display: flex;
+
       align-items: flex-start;
+
       justify-content: center;
+
     }
+
 
     .modal-caja {
-      width: min(650px, 100%);
-      background: var(--fondo-secundario);
-      border: 1px solid var(--borde);
+
+      width:
+        min(
+          680px,
+          100%
+        );
+
+      background:
+        var(--fondo-secundario);
+
+      border:
+        1px solid var(--borde);
+
       border-radius: 16px;
-      margin: 30px 0;
+
+      margin:
+        30px 0;
+
       overflow: hidden;
+
     }
+
 
     .modal-cabecera {
+
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-start;
+
       gap: 20px;
+
       padding: 24px;
-      border-bottom: 1px solid var(--borde);
+
+      border-bottom:
+        1px solid var(--borde);
+
     }
+
 
     .modal-cabecera h2 {
-      margin: 5px 0 0;
-      font-family: Georgia, "Times New Roman", serif;
+
+      margin:
+        5px 0 0;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
       font-size: 30px;
-      font-weight: normal;
+
+      font-weight:
+        normal;
+
     }
+
 
     .cerrar {
+
       width: 38px;
+
       height: 38px;
+
       border-radius: 50%;
-      border: 1px solid var(--borde);
+
+      border:
+        1px solid var(--borde);
+
       background: #222;
+
       color: white;
+
       font-size: 22px;
+
     }
+
+
+    /* ===================================================== */
+    /* FORMULARIO                                            */
+    /* ===================================================== */
 
     form {
+
       padding: 24px;
+
     }
+
 
     .campo {
+
       margin-bottom: 19px;
+
     }
 
+
     .campo label {
+
       display: block;
+
       margin-bottom: 7px;
+
       font-size: 13px;
+
       font-weight: bold;
+
     }
+
 
     .campo input,
     .campo select {
+
       width: 100%;
+
       padding: 14px;
+
       border-radius: 8px;
-      border: 1px solid var(--borde);
+
+      border:
+        1px solid var(--borde);
+
       background: #101010;
+
       color: white;
+
       outline: none;
+
     }
+
 
     .campo input:focus,
     .campo select:focus {
-      border-color: var(--dorado);
+
+      border-color:
+        var(--dorado);
+
     }
+
 
     .cantidad-control {
+
       display: grid;
-      grid-template-columns: 50px 1fr 50px;
+
+      grid-template-columns:
+        50px 1fr 50px;
+
       gap: 8px;
+
     }
+
 
     .cantidad-control button {
-      border: 1px solid var(--borde);
+
+      border:
+        1px solid var(--borde);
+
       background: #292929;
+
       color: white;
+
       border-radius: 8px;
+
       font-size: 22px;
+
     }
+
 
     #cantidad {
+
       text-align: center;
+
     }
+
 
     .resumen {
-      border: 1px solid var(--borde);
+
+      border:
+        1px solid var(--borde);
+
       border-radius: 10px;
+
       padding: 18px;
-      margin: 25px 0;
+
+      margin:
+        25px 0;
+
       background: #111;
+
     }
+
 
     .resumen-linea {
+
       display: flex;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       gap: 15px;
-      margin: 9px 0;
-      color: var(--texto-suave);
+
+      margin:
+        9px 0;
+
+      color:
+        var(--texto-suave);
+
     }
+
 
     .resumen-total {
-      border-top: 1px solid var(--borde);
+
+      border-top:
+        1px solid var(--borde);
+
       padding-top: 15px;
+
       margin-top: 15px;
+
       display: flex;
+
       align-items: center;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
     }
+
 
     .resumen-total strong:last-child {
+
       font-size: 26px;
-      color: var(--dorado-claro);
+
+      color:
+        var(--dorado-claro);
+
     }
+
 
     .terminos {
+
       display: flex;
-      align-items: flex-start;
+
+      align-items:
+        flex-start;
+
       gap: 10px;
-      color: var(--texto-suave);
+
+      color:
+        var(--texto-suave);
+
       font-size: 13px;
+
       line-height: 1.5;
+
       margin-bottom: 22px;
+
     }
 
-    .terminos input {
-      margin-top: 3px;
-    }
 
     .boton-pago {
+
       width: 100%;
+
       padding: 16px;
-      background: var(--dorado);
+
+      background:
+        var(--dorado);
+
       color: #111;
+
       border: none;
+
       border-radius: 8px;
+
       font-size: 17px;
+
       font-weight: bold;
+
     }
+
 
     .boton-pago:disabled {
+
       opacity: .6;
+
       cursor: wait;
+
     }
 
-    #resultadoCompra {
+
+    /* ===================================================== */
+    /* ZONA VPOS                                             */
+    /* ===================================================== */
+
+    #zonaPagoVpos {
+
       display: none;
-      padding: 26px;
-      text-align: center;
+
+      padding: 24px;
+
     }
 
-    #resultadoCompra.activo {
+
+    #zonaPagoVpos.activo {
+
       display: block;
+
     }
 
-    #resultadoCompra .icono {
-      font-size: 45px;
-      margin-bottom: 10px;
-      color: #6fd56f;
+
+    .pago-cabecera {
+
+      text-align: center;
+
+      margin-bottom: 20px;
+
     }
 
-    #resultadoCompra h3 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 30px;
-      margin: 0 0 12px;
+
+    .pago-cabecera h3 {
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size: 27px;
+
+      margin:
+        0 0 10px;
+
     }
 
-    #resultadoCompra p {
-      color: var(--texto-suave);
-      line-height: 1.6;
+
+    .pago-cabecera p {
+
+      margin: 0;
+
+      color:
+        var(--texto-suave);
+
+      line-height: 1.5;
+
     }
 
-    .id-orden {
-      display: inline-block;
-      background: #111;
-      border: 1px solid var(--borde);
+
+    .orden-id {
+
+      display:
+        inline-block;
+
+      margin-top: 12px;
+
+      padding:
+        8px 12px;
+
+      border:
+        1px solid var(--borde);
+
+      border-radius: 6px;
+
+      color:
+        var(--dorado-claro);
+
+      font-family:
+        monospace;
+
+      font-size: 13px;
+
+    }
+
+
+    #iframe-container {
+
+      width: 100%;
+
+      min-height: 420px;
+
+      margin-top: 20px;
+
+    }
+
+
+    .cargando {
+
+      text-align: center;
+
+      padding: 40px;
+
+      color:
+        var(--texto-suave);
+
+    }
+
+
+    .error-box {
+
+      background:
+        rgba(179,38,30,.18);
+
+      border:
+        1px solid var(--rojo);
+
       border-radius: 8px;
-      padding: 11px 15px;
-      margin: 10px 0;
-      color: var(--dorado-claro);
-      font-family: monospace;
+
+      padding: 18px;
+
+      margin-top: 20px;
+
+      color: #ffd9d6;
+
+      display: none;
+
     }
+
+
+    .volver {
+
+      width: 100%;
+
+      margin-top: 18px;
+
+      padding: 13px;
+
+      border-radius: 8px;
+
+      border:
+        1px solid var(--borde);
+
+      background: #222;
+
+      color: white;
+
+    }
+
 
     footer {
-      border-top: 1px solid var(--borde);
-      padding: 35px 20px;
+
+      border-top:
+        1px solid var(--borde);
+
+      padding:
+        35px 20px;
+
       text-align: center;
-      color: var(--texto-suave);
+
+      color:
+        var(--texto-suave);
+
       font-size: 13px;
+
     }
 
-    @media (max-width: 600px) {
+
+    @media (
+      max-width:600px
+    ) {
+
       header {
+
         position: static;
+
       }
 
-      nav {
-        display: none;
-      }
 
       .hero {
+
         min-height: 360px;
-        padding: 55px 20px;
+
+        padding:
+          55px 20px;
+
       }
+
 
       .afiche {
-        height: 430px;
+
+        height: 470px;
+
       }
+
 
       .modal {
+
         padding: 8px;
+
       }
 
+
       .modal-caja {
-        margin: 10px 0;
+
+        margin:
+          10px 0;
+
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-<header>
- <div class="marca" style="display:flex;flex-direction:row;align-items:center;gap:12px;">
-  <img
-    src="Arkhe en escena LOGO 1 por 1.png"
-    alt="Arkhé en Escena"
-    style="height:48px;width:auto;display:block;"
-  >
 
-  <div>
-    <strong>ARKHÉ</strong>
-    <span>En Escena</span>
+<!-- ======================================================= -->
+<!-- HEADER                                                  -->
+<!-- ======================================================= -->
+
+<header>
+
+  <div class="header-inner">
+
+    <div class="marca">
+
+      <img
+        src="Arkhe en escena LOGO 1 por 1.png"
+        alt="Arkhé en Escena"
+      >
+
+      <div class="marca-texto">
+
+        <strong>
+          ARKHÉ
+        </strong>
+
+        <span>
+          En Escena
+        </span>
+
+      </div>
+
+    </div>
+
   </div>
+
 </header>
 
 
-<section class="hero">
-  <div class="hero-contenido">
-    <div class="sobrelinea">Boletería oficial</div>
+<!-- ======================================================= -->
+<!-- HERO                                                    -->
+<!-- ======================================================= -->
 
-    <h1>Historias para vivir en escena.</h1>
+<section class="hero">
+
+  <div class="hero-contenido">
+
+    <div class="sobrelinea">
+      Boletería oficial
+    </div>
+
+    <h1>
+      Nietzsche:
+      El loco de Turín
+    </h1>
 
     <p>
-      Comprá tus entradas para las producciones de Arkhé en Escena
-      desde nuestra boletería oficial.
+      Un unipersonal sobre la búsqueda
+      del superhombre.
     </p>
 
     <button
       class="btn-principal"
-      onclick="document.getElementById('cartelera').scrollIntoView()">
-      Ver cartelera
+      onclick="
+        document
+          .getElementById('cartelera')
+          .scrollIntoView()
+      "
+    >
+      Comprar entradas
     </button>
+
   </div>
+
 </section>
 
 
+<!-- ======================================================= -->
+<!-- CARTELERA                                               -->
+<!-- ======================================================= -->
+
 <main>
 
-  <section class="seccion" id="cartelera">
+  <section
+    class="seccion"
+    id="cartelera"
+  >
 
     <div class="titulo-seccion">
-      <span>Temporada</span>
-      <h2>Cartelera</h2>
+
+      <span>
+        Temporada
+      </span>
+
+      <h2>
+        Cartelera
+      </h2>
+
     </div>
 
-    <div class="grid-obras" id="listaObras"></div>
+
+    <div
+      class="grid-obras"
+      id="listaObras"
+    >
+    </div>
 
   </section>
 
@@ -543,40 +1227,89 @@
 
 
 <footer>
-  © 2026 Arkhé en Escena E.A.S. · Boletería oficial
+
+  © 2026 Arkhé en Escena E.A.S.
+  · Boletería oficial
+
 </footer>
 
 
-<div class="modal" id="modalCompra">
+<!-- ======================================================= -->
+<!-- MODAL                                                   -->
+<!-- ======================================================= -->
+
+<div
+  class="modal"
+  id="modalCompra"
+>
 
   <div class="modal-caja">
+
 
     <div class="modal-cabecera">
 
       <div>
-        <div class="sobrelinea">Comprar entradas</div>
-        <h2 id="modalTitulo"></h2>
+
+        <div class="sobrelinea">
+          Comprar entradas
+        </div>
+
+        <h2 id="modalTitulo">
+        </h2>
+
       </div>
 
-      <button class="cerrar" onclick="cerrarCompra()">×</button>
+
+      <button
+        class="cerrar"
+        type="button"
+        onclick="cerrarCompra()"
+      >
+        ×
+      </button>
 
     </div>
 
 
+    <!-- =================================================== -->
+    <!-- DATOS DEL COMPRADOR                                 -->
+    <!-- =================================================== -->
+
     <form id="formCompra">
 
+
       <div class="campo">
-        <label for="funcion">Función</label>
-        <select id="funcion" required></select>
+
+        <label for="funcion">
+          Función
+        </label>
+
+        <select
+          id="funcion"
+          required
+        >
+        </select>
+
       </div>
 
 
       <div class="campo">
-        <label>Cantidad de entradas</label>
+
+        <label>
+          Cantidad de entradas
+        </label>
+
 
         <div class="cantidad-control">
 
-          <button type="button" onclick="cambiarCantidad(-1)">−</button>
+
+          <button
+            type="button"
+            onclick="cambiarCantidad(-1)"
+          >
+            −
+          </button>
+
 
           <input
             id="cantidad"
@@ -584,113 +1317,207 @@
             min="1"
             max="10"
             value="1"
-            readonly>
+            readonly
+          >
 
-          <button type="button" onclick="cambiarCantidad(1)">+</button>
+
+          <button
+            type="button"
+            onclick="cambiarCantidad(1)"
+          >
+            +
+          </button>
+
 
         </div>
+
       </div>
 
 
       <div class="campo">
-        <label for="nombre">Nombre y apellido</label>
+
+        <label for="nombre">
+          Nombre y apellido
+        </label>
 
         <input
           id="nombre"
           type="text"
           autocomplete="name"
-          placeholder="Ej.: Walter Mereles"
-          required>
+          placeholder="Nombre y apellido"
+          required
+        >
+
       </div>
 
 
       <div class="campo">
-        <label for="correo">Correo electrónico</label>
+
+        <label for="correo">
+          Correo electrónico
+        </label>
 
         <input
           id="correo"
           type="email"
           autocomplete="email"
           placeholder="correo@ejemplo.com"
-          required>
+          required
+        >
+
       </div>
 
 
       <div class="campo">
-        <label for="whatsapp">WhatsApp</label>
+
+        <label for="whatsapp">
+          WhatsApp
+        </label>
 
         <input
           id="whatsapp"
           type="tel"
           autocomplete="tel"
           placeholder="0981 000 000"
-          required>
+          required
+        >
+
       </div>
 
 
       <div class="resumen">
 
-        <div class="resumen-linea">
-          <span>Precio unitario</span>
-          <strong id="precioUnitario"></strong>
-        </div>
 
         <div class="resumen-linea">
-          <span>Cantidad</span>
-          <strong id="resumenCantidad">1</strong>
+
+          <span>
+            Precio unitario
+          </span>
+
+          <strong id="precioUnitario">
+          </strong>
+
         </div>
+
+
+        <div class="resumen-linea">
+
+          <span>
+            Cantidad
+          </span>
+
+          <strong id="resumenCantidad">
+            1
+          </strong>
+
+        </div>
+
 
         <div class="resumen-total">
-          <strong>Total</strong>
-          <strong id="totalCompra"></strong>
+
+          <strong>
+            Total
+          </strong>
+
+          <strong id="totalCompra">
+          </strong>
+
         </div>
+
 
       </div>
 
 
       <label class="terminos">
-        <input id="acepto" type="checkbox" required>
+
+        <input
+          id="acepto"
+          type="checkbox"
+          required
+        >
 
         <span>
-          Confirmo que los datos ingresados son correctos y
-          acepto las condiciones de compra de Arkhé en Escena.
+
+          Confirmo que los datos
+          ingresados son correctos
+          y acepto las condiciones
+          de compra de
+          Arkhé en Escena.
+
         </span>
+
       </label>
 
 
-      <button class="boton-pago" type="submit">
+      <button
+        class="boton-pago"
+        type="submit"
+      >
         CONTINUAR AL PAGO
       </button>
+
 
     </form>
 
 
-    <div id="resultadoCompra">
+    <!-- =================================================== -->
+    <!-- VPOS                                                -->
+    <!-- =================================================== -->
 
-      <div class="icono">✓</div>
+    <div id="zonaPagoVpos">
 
-      <h3>Orden creada</h3>
 
-      <p>
-        La orden fue registrada correctamente.
-      </p>
+      <div class="pago-cabecera">
 
-      <div class="id-orden" id="ordenGenerada"></div>
+        <h3>
+          Pago seguro
+        </h3>
 
-      <p>
-        Estado: <strong>PENDIENTE</strong>
-      </p>
+        <p>
+          Completá el pago
+          utilizando la plataforma
+          segura de Bancard.
+        </p>
 
-      <p>
-        En la siguiente etapa conectaremos esta orden
-        con el sistema de pago de Bancard.
-      </p>
+        <div
+          class="orden-id"
+          id="ordenMostrada"
+        >
+        </div>
 
-      <button class="btn-principal" onclick="cerrarCompra()">
-        Volver a la cartelera
+      </div>
+
+
+      <div
+        class="cargando"
+        id="cargandoPago"
+      >
+        Preparando pago seguro...
+      </div>
+
+
+      <div id="iframe-container">
+      </div>
+
+
+      <div
+        class="error-box"
+        id="errorPago"
+      >
+      </div>
+
+
+      <button
+        type="button"
+        class="volver"
+        onclick="volverFormulario()"
+      >
+        Volver
       </button>
 
+
     </div>
+
 
   </div>
 
@@ -699,82 +1526,164 @@
 
 <script>
 
-  const APPS_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbx_QC2Tc4Fkd4b8p5aPNBuZFbSyQyiQvqwoaZpYJhPmYLDJfv-g3WIxbCiMXk-aueDcDA/exec";
+
+/* ========================================================= */
+/* CONFIGURACIÓN                                             */
+/* ========================================================= */
 
 
-  const OBRAS = [
-
-    {
-      id: "piedra-bruta",
-
-      titulo: "La Piedra Bruta",
-
-      lugar: "Alianza Francesa",
-
-      hora: "20:30",
-
-      precio: 75000,
-
-      imagen: "",
-
-      funciones: [
-        "Próxima función – Fecha a confirmar"
-      ]
-    }
-
-  ];
+const APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbx_QC2Tc4Fkd4b8p5aPNBuZFbSyQyiQvqwoaZpYJhPmYLDJfv-g3WIxbCiMXk-aueDcDA/exec";
 
 
-  let obraActual = null;
-  let cantidadActual = 1;
+const VPOS_WORKER_URL =
+  "https://arkhe-tpago.waltermersproduccion.workers.dev";
 
 
-  function guaranies(numero) {
+/*
+  IMPORTANTE:
 
-    return "G. " +
-      Number(numero).toLocaleString("es-PY");
+  Este es STAGING.
+
+  El monto actual se puede cambiar abajo.
+
+  Para pruebas podés poner 10000.
+*/
+
+
+const OBRAS = [
+
+  {
+
+    id:
+      "nietzsche-loco-turin",
+
+    titulo:
+      "Nietzsche: El loco de Turín",
+
+    lugar:
+      "Sala La Correíta",
+
+    hora:
+      "20:00",
+
+    precio:
+      10000,
+
+    /*
+      Para prueba:
+      10000 = G. 10.000
+
+      Después ponemos
+      el precio real.
+    */
+
+    imagen:
+      "",
+
+    funciones: [
+
+      "9 de noviembre"
+
+    ]
 
   }
 
-
-  function cargarCartelera() {
-
-    const contenedor =
-      document.getElementById("listaObras");
-
-    contenedor.innerHTML = "";
+];
 
 
-    OBRAS.forEach(function(obra) {
+let obraActual =
+  null;
+
+
+let cantidadActual =
+  1;
+
+
+/* ========================================================= */
+/* FORMATO GUARANÍES                                         */
+/* ========================================================= */
+
+
+function guaranies(numero) {
+
+  return "G. " +
+    Number(numero)
+      .toLocaleString(
+        "es-PY"
+      );
+
+}
+
+
+/* ========================================================= */
+/* CARTELERA                                                 */
+/* ========================================================= */
+
+
+function cargarCartelera() {
+
+
+  const contenedor =
+    document
+      .getElementById(
+        "listaObras"
+      );
+
+
+  contenedor.innerHTML =
+    "";
+
+
+  OBRAS.forEach(
+    function(obra) {
+
 
       const tarjeta =
-        document.createElement("article");
+        document
+          .createElement(
+            "article"
+          );
 
-      tarjeta.className = "obra";
+
+      tarjeta.className =
+        "obra";
 
 
       let afiche;
 
 
-      if (obra.imagen) {
+      if (
+        obra.imagen
+      ) {
+
 
         afiche =
+
           '<div class="afiche">' +
+
             '<img src="' +
             obra.imagen +
             '" alt="' +
             obra.titulo +
             '">' +
+
           '</div>';
+
 
       } else {
 
+
         afiche =
+
           '<div class="afiche">' +
+
             '<div class="afiche-placeholder">' +
+
               obra.titulo +
+
             '</div>' +
+
           '</div>';
 
       }
@@ -787,403 +1696,935 @@
         '<div class="obra-contenido">' +
 
           '<h3>' +
-          obra.titulo +
+            obra.titulo +
           '</h3>' +
 
           '<div class="obra-meta">' +
+
             obra.lugar +
+
             '<br>' +
+
             obra.hora +
+
             ' h' +
+
           '</div>' +
 
           '<div class="obra-precio">' +
-            guaranies(obra.precio) +
+
+            guaranies(
+              obra.precio
+            ) +
+
           '</div>' +
 
           '<button class="obra-boton">' +
+
             'COMPRAR ENTRADAS' +
+
           '</button>' +
 
         '</div>';
 
 
       tarjeta
-        .querySelector(".obra-boton")
+        .querySelector(
+          ".obra-boton"
+        )
         .addEventListener(
+
           "click",
+
           function() {
 
-            abrirCompra(obra.id);
+            abrirCompra(
+              obra.id
+            );
 
           }
+
         );
 
 
-      contenedor.appendChild(tarjeta);
+      contenedor
+        .appendChild(
+          tarjeta
+        );
 
-    });
-
-  }
-
-
-  function abrirCompra(idObra) {
-
-    obraActual =
-      OBRAS.find(
-        function(obra) {
-          return obra.id === idObra;
-        }
-      );
-
-
-    if (!obraActual) {
-      return;
     }
 
+  );
 
-    cantidadActual = 1;
-
-
-    document.getElementById(
-      "modalTitulo"
-    ).textContent =
-      obraActual.titulo;
+}
 
 
-    const selector =
-      document.getElementById("funcion");
+/* ========================================================= */
+/* ABRIR COMPRA                                              */
+/* ========================================================= */
 
 
-    selector.innerHTML = "";
+function abrirCompra(
+  idObra
+) {
 
 
-    obraActual.funciones.forEach(
-      function(funcion) {
+  obraActual =
+    OBRAS.find(
 
-        const opcion =
-          document.createElement("option");
+      function(obra) {
 
-        opcion.value = funcion;
-        opcion.textContent = funcion;
-
-        selector.appendChild(opcion);
+        return (
+          obra.id === idObra
+        );
 
       }
+
     );
 
 
-    document.getElementById(
-      "cantidad"
-    ).value = 1;
+  if (
+    !obraActual
+  ) {
 
-
-    document.getElementById(
-      "formCompra"
-    ).style.display = "block";
-
-
-    document.getElementById(
-      "resultadoCompra"
-    ).classList.remove("activo");
-
-
-    actualizarTotal();
-
-
-    document.getElementById(
-      "modalCompra"
-    ).classList.add("activo");
-
-
-    document.body.style.overflow =
-      "hidden";
+    return;
 
   }
 
 
-  function cerrarCompra() {
-
-    document.getElementById(
-      "modalCompra"
-    ).classList.remove("activo");
+  cantidadActual =
+    1;
 
 
-    document.body.style.overflow = "";
+  document
+    .getElementById(
+      "modalTitulo"
+    )
+    .textContent =
+      obraActual.titulo;
 
 
-    document.getElementById(
+  const selector =
+    document
+      .getElementById(
+        "funcion"
+      );
+
+
+  selector.innerHTML =
+    "";
+
+
+  obraActual
+    .funciones
+    .forEach(
+
+      function(funcion) {
+
+
+        const opcion =
+          document
+            .createElement(
+              "option"
+            );
+
+
+        opcion.value =
+          funcion;
+
+
+        opcion.textContent =
+          funcion;
+
+
+        selector
+          .appendChild(
+            opcion
+          );
+
+      }
+
+    );
+
+
+  document
+    .getElementById(
+      "cantidad"
+    )
+    .value =
+      1;
+
+
+  document
+    .getElementById(
       "formCompra"
-    ).reset();
+    )
+    .style.display =
+      "block";
 
 
-    cantidadActual = 1;
+  document
+    .getElementById(
+      "zonaPagoVpos"
+    )
+    .classList
+    .remove(
+      "activo"
+    );
+
+
+  limpiarPago();
+
+
+  actualizarTotal();
+
+
+  document
+    .getElementById(
+      "modalCompra"
+    )
+    .classList
+    .add(
+      "activo"
+    );
+
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+/* ========================================================= */
+/* CERRAR                                                    */
+/* ========================================================= */
+
+
+function cerrarCompra() {
+
+
+  document
+    .getElementById(
+      "modalCompra"
+    )
+    .classList
+    .remove(
+      "activo"
+    );
+
+
+  document.body.style.overflow =
+    "";
+
+
+  document
+    .getElementById(
+      "formCompra"
+    )
+    .reset();
+
+
+  cantidadActual =
+    1;
+
+
+  limpiarPago();
+
+}
+
+
+/* ========================================================= */
+/* CANTIDAD                                                  */
+/* ========================================================= */
+
+
+function cambiarCantidad(
+  cambio
+) {
+
+
+  cantidadActual +=
+    cambio;
+
+
+  if (
+    cantidadActual < 1
+  ) {
+
+    cantidadActual =
+      1;
 
   }
 
 
-  function cambiarCantidad(cambio) {
+  if (
+    cantidadActual > 10
+  ) {
 
-    cantidadActual += cambio;
+    cantidadActual =
+      10;
 
-
-    if (cantidadActual < 1) {
-      cantidadActual = 1;
-    }
-
-
-    if (cantidadActual > 10) {
-      cantidadActual = 10;
-    }
+  }
 
 
-    document.getElementById(
+  document
+    .getElementById(
       "cantidad"
-    ).value =
+    )
+    .value =
       cantidadActual;
 
 
-    actualizarTotal();
+  actualizarTotal();
+
+}
+
+
+/* ========================================================= */
+/* TOTAL                                                     */
+/* ========================================================= */
+
+
+function actualizarTotal() {
+
+
+  if (
+    !obraActual
+  ) {
+
+    return;
 
   }
 
 
-  function actualizarTotal() {
-
-    if (!obraActual) {
-      return;
-    }
+  const total =
+    obraActual.precio *
+    cantidadActual;
 
 
-    const total =
-      obraActual.precio *
-      cantidadActual;
-
-
-    document.getElementById(
+  document
+    .getElementById(
       "precioUnitario"
-    ).textContent =
+    )
+    .textContent =
       guaranies(
         obraActual.precio
       );
 
 
-    document.getElementById(
+  document
+    .getElementById(
       "resumenCantidad"
-    ).textContent =
+    )
+    .textContent =
       cantidadActual;
 
 
-    document.getElementById(
+  document
+    .getElementById(
       "totalCompra"
-    ).textContent =
-      guaranies(total);
+    )
+    .textContent =
+      guaranies(
+        total
+      );
 
-  }
+}
+
+
+/* ========================================================= */
+/* LIMPIAR VPOS                                              */
+/* ========================================================= */
+
+
+function limpiarPago() {
 
 
   document
-    .getElementById("formCompra")
-    .addEventListener(
-      "submit",
-      function(event) {
-
-        event.preventDefault();
-
-
-        if (!obraActual) {
-          return;
-        }
+    .getElementById(
+      "iframe-container"
+    )
+    .innerHTML =
+      "";
 
 
-        const nombre =
-          document
-            .getElementById("nombre")
-            .value
-            .trim();
+  document
+    .getElementById(
+      "cargandoPago"
+    )
+    .style.display =
+      "none";
 
 
-        const correo =
-          document
-            .getElementById("correo")
-            .value
-            .trim();
+  const error =
+    document
+      .getElementById(
+        "errorPago"
+      );
 
 
-        const whatsapp =
-          document
-            .getElementById("whatsapp")
-            .value
-            .trim();
+  error.style.display =
+    "none";
 
 
-        const funcion =
-          document
-            .getElementById("funcion")
-            .value;
+  error.textContent =
+    "";
 
 
-        if (
-          !nombre ||
-          !correo ||
-          !whatsapp ||
-          !funcion
-        ) {
+  document
+    .getElementById(
+      "ordenMostrada"
+    )
+    .textContent =
+      "";
 
-          alert(
-            "Completá todos los datos antes de continuar."
-          );
-
-          return;
-
-        }
+}
 
 
-        const orden = {
-
-          obra:
-            obraActual.id,
-
-          titulo:
-            obraActual.titulo,
-
-          funcion:
-            funcion,
-
-          cantidad:
-            cantidadActual,
-
-          nombre:
-            nombre,
-
-          correo:
-            correo,
-
-          whatsapp:
-            whatsapp
-
-        };
+/* ========================================================= */
+/* VOLVER                                                    */
+/* ========================================================= */
 
 
-        const botonPago =
-          document.querySelector(
+function volverFormulario() {
+
+
+  limpiarPago();
+
+
+  document
+    .getElementById(
+      "zonaPagoVpos"
+    )
+    .classList
+    .remove(
+      "activo"
+    );
+
+
+  document
+    .getElementById(
+      "formCompra"
+    )
+    .style.display =
+      "block";
+
+}
+
+
+/* ========================================================= */
+/* CREAR COMPRA                                              */
+/* ========================================================= */
+
+
+document
+  .getElementById(
+    "formCompra"
+  )
+  .addEventListener(
+
+    "submit",
+
+    async function(event) {
+
+
+      event
+        .preventDefault();
+
+
+      if (
+        !obraActual
+      ) {
+
+        return;
+
+      }
+
+
+      const nombre =
+        document
+          .getElementById(
+            "nombre"
+          )
+          .value
+          .trim();
+
+
+      const correo =
+        document
+          .getElementById(
+            "correo"
+          )
+          .value
+          .trim();
+
+
+      const whatsapp =
+        document
+          .getElementById(
+            "whatsapp"
+          )
+          .value
+          .trim();
+
+
+      const funcion =
+        document
+          .getElementById(
+            "funcion"
+          )
+          .value;
+
+
+      if (
+
+        !nombre ||
+
+        !correo ||
+
+        !whatsapp ||
+
+        !funcion
+
+      ) {
+
+
+        alert(
+          "Completá todos los datos antes de continuar."
+        );
+
+
+        return;
+
+      }
+
+
+      const total =
+        obraActual.precio *
+        cantidadActual;
+
+
+      const orden = {
+
+
+        obra:
+          obraActual.id,
+
+
+        titulo:
+          obraActual.titulo,
+
+
+        funcion:
+          funcion,
+
+
+        cantidad:
+          cantidadActual,
+
+
+        nombre:
+          nombre,
+
+
+        correo:
+          correo,
+
+
+        whatsapp:
+          whatsapp,
+
+
+        total:
+          total
+
+      };
+
+
+      const botonPago =
+        document
+          .querySelector(
             ".boton-pago"
           );
 
 
-        botonPago.disabled = true;
-
-        botonPago.textContent =
-          "CREANDO ORDEN...";
+      botonPago.disabled =
+        true;
 
 
-        fetch(
-          APPS_SCRIPT_URL,
-          {
-
-            method: "POST",
-
-            headers: {
-              "Content-Type":
-                "text/plain;charset=utf-8"
-            },
-
-            body:
-              JSON.stringify(orden)
-
-          }
-        )
-
-        .then(function(response) {
-
-          if (!response.ok) {
-            throw new Error(
-              "Error HTTP " +
-              response.status
-            );
-          }
-
-          return response.json();
-
-        })
-
-        .then(function(data) {
-
-          if (!data.ok) {
-
-            throw new Error(
-              data.error ||
-              "No se pudo crear la orden"
-            );
-
-          }
+      botonPago.textContent =
+        "CREANDO ORDEN...";
 
 
-          document.getElementById(
-            "ordenGenerada"
-          ).textContent =
-            data.idOrden;
+      try {
 
 
-          document.getElementById(
-            "formCompra"
-          ).style.display =
-            "none";
+        /* =============================================== */
+        /* 1. CREAR ORDEN EN APPS SCRIPT                  */
+        /* =============================================== */
 
 
-          document.getElementById(
-            "resultadoCompra"
-          ).classList.add(
-            "activo"
+        const respuestaOrden =
+          await fetch(
+
+            APPS_SCRIPT_URL,
+
+            {
+
+              method:
+                "POST",
+
+              headers: {
+
+                "Content-Type":
+                  "text/plain;charset=utf-8"
+
+              },
+
+              body:
+                JSON.stringify(
+                  orden
+                )
+
+            }
+
           );
 
-        })
-
-        .catch(function(error) {
-
-          console.error(error);
-
-          alert(
-            "Hubo un problema al crear la orden. " +
-            "Intentá nuevamente."
-          );
-
-        })
-
-        .finally(function() {
-
-          botonPago.disabled = false;
-
-          botonPago.textContent =
-            "CONTINUAR AL PAGO";
-
-        });
-
-      }
-    );
-
-
-  document
-    .getElementById("modalCompra")
-    .addEventListener(
-      "click",
-      function(event) {
 
         if (
-          event.target === this
+          !respuestaOrden.ok
         ) {
 
-          cerrarCompra();
+          throw new Error(
+            "No se pudo crear la orden."
+          );
 
         }
 
+
+        const datosOrden =
+          await respuestaOrden
+            .json();
+
+
+        if (
+          !datosOrden.ok
+        ) {
+
+          throw new Error(
+
+            datosOrden.error ||
+
+            "No se pudo crear la orden."
+
+          );
+
+        }
+
+
+        const idOrden =
+          datosOrden.idOrden;
+
+
+        /* =============================================== */
+        /* 2. MOSTRAR ZONA DE PAGO                         */
+        /* =============================================== */
+
+
+        document
+          .getElementById(
+            "formCompra"
+          )
+          .style.display =
+            "none";
+
+
+        document
+          .getElementById(
+            "zonaPagoVpos"
+          )
+          .classList
+          .add(
+            "activo"
+          );
+
+
+        document
+          .getElementById(
+            "ordenMostrada"
+          )
+          .textContent =
+            "Orden: " +
+            idOrden;
+
+
+        document
+          .getElementById(
+            "cargandoPago"
+          )
+          .style.display =
+            "block";
+
+
+        /* =============================================== */
+        /* 3. CREAR SINGLE BUY EN VPOS                     */
+        /* =============================================== */
+
+
+        const respuestaVpos =
+          await fetch(
+
+            VPOS_WORKER_URL +
+            "/vpos/create",
+
+            {
+
+              method:
+                "POST",
+
+              headers: {
+
+                "Content-Type":
+                  "application/json"
+
+              },
+
+              body:
+                JSON.stringify({
+
+                  amount:
+                    total,
+
+                  description:
+                    "Entrada Arkhe",
+
+                  order_id:
+                    idOrden,
+
+                  return_url:
+                    window.location.href,
+
+                  cancel_url:
+                    window.location.href
+
+                })
+
+            }
+
+          );
+
+
+        const datosVpos =
+          await respuestaVpos
+            .json();
+
+
+        console.log(
+          "Respuesta vPOS:",
+          datosVpos
+        );
+
+
+        if (
+          !respuestaVpos.ok
+        ) {
+
+          throw new Error(
+
+            "vPOS respondió HTTP " +
+
+            respuestaVpos.status +
+
+            ": " +
+
+            JSON.stringify(
+              datosVpos
+            )
+
+          );
+
+        }
+
+
+        if (
+
+          !datosVpos.vpos ||
+
+          datosVpos.vpos.status
+            !==
+          "success" ||
+
+          !datosVpos.vpos.process_id
+
+        ) {
+
+
+          throw new Error(
+
+            "Bancard no devolvió un process_id válido."
+
+          );
+
+        }
+
+
+        const processId =
+          datosVpos
+            .vpos
+            .process_id;
+
+
+        /* =============================================== */
+        /* 4. LEVANTAR IFRAME                              */
+        /* =============================================== */
+
+
+        document
+          .getElementById(
+            "cargandoPago"
+          )
+          .style.display =
+            "none";
+
+
+        document
+          .getElementById(
+            "iframe-container"
+          )
+          .innerHTML =
+            "";
+
+
+        const estilosVpos = {
+
+          "form-background-color":
+            "#171717",
+
+          "button-background-color":
+            "#c59a56",
+
+          "button-text-color":
+            "#111111",
+
+          "button-border-color":
+            "#c59a56",
+
+          "input-background-color":
+            "#ffffff",
+
+          "input-text-color":
+            "#111111",
+
+          "input-placeholder-color":
+            "#666666"
+
+        };
+
+
+        Bancard
+          .Checkout
+          .createForm(
+
+            "iframe-container",
+
+            processId,
+
+            estilosVpos
+
+          );
+
+
+      } catch (
+        error
+      ) {
+
+
+        console.error(
+          error
+        );
+
+
+        const errorBox =
+          document
+            .getElementById(
+              "errorPago"
+            );
+
+
+        errorBox.style.display =
+          "block";
+
+
+        errorBox.textContent =
+          "No se pudo iniciar el pago: " +
+          error.message;
+
+
+        document
+          .getElementById(
+            "cargandoPago"
+          )
+          .style.display =
+            "none";
+
+
+      } finally {
+
+
+        botonPago.disabled =
+          false;
+
+
+        botonPago.textContent =
+          "CONTINUAR AL PAGO";
+
       }
-    );
+
+    }
+
+  );
 
 
-  cargarCartelera();
+/* ========================================================= */
+/* CERRAR HACIENDO CLICK AFUERA                              */
+/* ========================================================= */
+
+
+document
+  .getElementById(
+    "modalCompra"
+  )
+  .addEventListener(
+
+    "click",
+
+    function(event) {
+
+
+      if (
+        event.target === this
+      ) {
+
+        cerrarCompra();
+
+      }
+
+    }
+
+  );
+
+
+/* ========================================================= */
+/* INICIAR                                                   */
+/* ========================================================= */
+
+
+cargarCartelera();
+
 
 </script>
 
+
 </body>
+
 </html>
