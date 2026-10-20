@@ -12,16 +12,9 @@
 
   <title>Boletería | Arkhé en Escena</title>
 
-
-  <!-- ===================================================== -->
-  <!-- BANCARD VPOS - STAGING                                -->
-  <!-- Cuando pasemos a producción cambiaremos esta URL      -->
-  <!-- ===================================================== -->
-
   <script
     src="https://vpos.infonet.com.py:8888/checkout/javascript/dist/bancard-checkout-4.0.0.js">
   </script>
-
 
   <style>
 
@@ -43,23 +36,18 @@
 
     }
 
-
     * {
       box-sizing: border-box;
     }
-
 
     html {
       scroll-behavior: smooth;
     }
 
-
     body {
 
       margin: 0;
-
       background: var(--fondo);
-
       color: var(--texto);
 
       font-family:
@@ -69,97 +57,64 @@
 
     }
 
-
     button,
     input,
     select {
-
       font: inherit;
-
     }
-
 
     button {
-
       cursor: pointer;
-
     }
-
-
-    /* ===================================================== */
-    /* HEADER                                                */
-    /* ===================================================== */
 
     header {
 
       padding: 20px;
-
-      border-bottom:
-        1px solid var(--borde);
+      border-bottom: 1px solid var(--borde);
 
       background:
         rgba(13,13,13,.97);
 
       position: sticky;
-
       top: 0;
-
       z-index: 50;
 
     }
 
-
     .header-inner {
 
-      width:
-        min(1150px,100%);
-
+      width: min(1150px,100%);
       margin: auto;
 
       display: flex;
-
       align-items: center;
-
-      justify-content:
-        space-between;
-
-      gap: 20px;
+      justify-content: space-between;
 
     }
-
 
     .marca {
 
       display: flex;
-
       flex-direction: row;
-
       align-items: center;
-
       gap: 12px;
 
     }
 
-
     .marca img {
 
       width: 50px;
-
       height: 50px;
-
       object-fit: contain;
 
     }
 
-
     .marca-texto {
 
       display: flex;
-
       flex-direction: column;
 
     }
-
 
     .marca strong {
 
@@ -169,7 +124,6 @@
         serif;
 
       letter-spacing: 2px;
-
       font-size: 21px;
 
       color:
@@ -177,11 +131,9 @@
 
     }
 
-
     .marca span {
 
       font-size: 11px;
-
       letter-spacing: 3px;
 
       color:
@@ -192,19 +144,12 @@
 
     }
 
-
-    /* ===================================================== */
-    /* HERO                                                  */
-    /* ===================================================== */
-
     .hero {
 
       min-height: 420px;
 
       display: flex;
-
       align-items: center;
-
       justify-content: center;
 
       padding:
@@ -228,13 +173,9 @@
 
     }
 
-
     .hero-contenido {
-
       max-width: 780px;
-
     }
-
 
     .sobrelinea {
 
@@ -245,13 +186,11 @@
         var(--dorado);
 
       letter-spacing: 4px;
-
       font-size: 12px;
 
       margin-bottom: 18px;
 
     }
-
 
     .hero h1 {
 
@@ -274,7 +213,6 @@
 
     }
 
-
     .hero p {
 
       max-width: 650px;
@@ -286,16 +224,13 @@
         var(--texto-suave);
 
       line-height: 1.6;
-
       font-size: 17px;
 
     }
 
-
     .btn-principal {
 
       margin-top: 30px;
-
       border: 0;
 
       padding:
@@ -309,23 +244,13 @@
       color: #111;
 
       font-weight: bold;
-
       font-size: 16px;
 
     }
 
-
     .btn-principal:hover {
-
-      background:
-        var(--dorado-claro);
-
+      background: var(--dorado-claro);
     }
-
-
-    /* ===================================================== */
-    /* CARTELERA                                             */
-    /* ===================================================== */
 
     main {
 
@@ -339,21 +264,13 @@
 
     }
 
-
     .seccion {
-
-      padding:
-        65px 0;
-
+      padding: 65px 0;
     }
-
 
     .titulo-seccion {
-
       margin-bottom: 30px;
-
     }
-
 
     .titulo-seccion span {
 
@@ -366,13 +283,11 @@
         var(--dorado);
 
       font-size: 11px;
-
       letter-spacing: 3px;
 
       margin-bottom: 8px;
 
     }
-
 
     .titulo-seccion h2 {
 
@@ -384,12 +299,9 @@
         serif;
 
       font-size: 38px;
-
-      font-weight:
-        normal;
+      font-weight: normal;
 
     }
-
 
     .grid-obras {
 
@@ -405,7 +317,6 @@
 
     }
 
-
     .obra {
 
       background:
@@ -418,30 +329,13 @@
 
       overflow: hidden;
 
-      transition:
-        transform .2s ease,
-        border-color .2s ease;
-
       max-width: 450px;
 
     }
 
-
-    .obra:hover {
-
-      transform:
-        translateY(-4px);
-
-      border-color:
-        var(--dorado);
-
-    }
-
-
     .afiche {
 
       height: 520px;
-
       width: 100%;
 
       background:
@@ -459,28 +353,22 @@
         );
 
       display: flex;
-
       align-items: center;
-
       justify-content: center;
 
       overflow: hidden;
 
     }
 
-
     .afiche img {
 
       width: 100%;
-
       height: 100%;
 
       object-fit: cover;
-
       display: block;
 
     }
-
 
     .afiche-placeholder {
 
@@ -500,13 +388,9 @@
 
     }
 
-
     .obra-contenido {
-
       padding: 22px;
-
     }
-
 
     .obra-contenido h3 {
 
@@ -525,18 +409,15 @@
 
     }
 
-
     .obra-meta {
 
       color:
         var(--texto-suave);
 
       font-size: 14px;
-
       line-height: 1.7;
 
     }
-
 
     .obra-precio {
 
@@ -546,18 +427,15 @@
         var(--dorado-claro);
 
       font-size: 22px;
-
       font-weight: bold;
 
     }
-
 
     .obra-boton {
 
       width: 100%;
 
       margin-top: 20px;
-
       padding: 14px;
 
       border-radius: 8px;
@@ -568,22 +446,15 @@
       border: none;
 
       color: #111;
-
       font-weight: bold;
 
     }
-
-
-    /* ===================================================== */
-    /* MODAL                                                 */
-    /* ===================================================== */
 
     .modal {
 
       display: none;
 
       position: fixed;
-
       inset: 0;
 
       background:
@@ -597,17 +468,17 @@
 
     }
 
-
     .modal.activo {
 
       display: flex;
 
-      align-items: flex-start;
+      align-items:
+        flex-start;
 
-      justify-content: center;
+      justify-content:
+        center;
 
     }
-
 
     .modal-caja {
 
@@ -632,7 +503,6 @@
 
     }
 
-
     .modal-cabecera {
 
       display: flex;
@@ -652,7 +522,6 @@
 
     }
 
-
     .modal-cabecera h2 {
 
       margin:
@@ -664,17 +533,13 @@
         serif;
 
       font-size: 30px;
-
-      font-weight:
-        normal;
+      font-weight: normal;
 
     }
-
 
     .cerrar {
 
       width: 38px;
-
       height: 38px;
 
       border-radius: 50%;
@@ -685,42 +550,27 @@
       background: #222;
 
       color: white;
-
       font-size: 22px;
 
     }
 
-
-    /* ===================================================== */
-    /* FORMULARIO                                            */
-    /* ===================================================== */
-
     form {
-
       padding: 24px;
-
     }
-
 
     .campo {
-
       margin-bottom: 19px;
-
     }
-
 
     .campo label {
 
       display: block;
-
       margin-bottom: 7px;
 
       font-size: 13px;
-
       font-weight: bold;
 
     }
-
 
     .campo input,
     .campo select {
@@ -742,7 +592,6 @@
 
     }
 
-
     .campo input:focus,
     .campo select:focus {
 
@@ -750,7 +599,6 @@
         var(--dorado);
 
     }
-
 
     .cantidad-control {
 
@@ -762,7 +610,6 @@
       gap: 8px;
 
     }
-
 
     .cantidad-control button {
 
@@ -779,13 +626,9 @@
 
     }
 
-
     #cantidad {
-
       text-align: center;
-
     }
-
 
     .resumen {
 
@@ -802,7 +645,6 @@
       background: #111;
 
     }
-
 
     .resumen-linea {
 
@@ -821,14 +663,12 @@
 
     }
 
-
     .resumen-total {
 
       border-top:
         1px solid var(--borde);
 
       padding-top: 15px;
-
       margin-top: 15px;
 
       display: flex;
@@ -840,7 +680,6 @@
 
     }
 
-
     .resumen-total strong:last-child {
 
       font-size: 26px;
@@ -849,7 +688,6 @@
         var(--dorado-claro);
 
     }
-
 
     .terminos {
 
@@ -864,13 +702,11 @@
         var(--texto-suave);
 
       font-size: 13px;
-
       line-height: 1.5;
 
       margin-bottom: 22px;
 
     }
-
 
     .boton-pago {
 
@@ -888,11 +724,9 @@
       border-radius: 8px;
 
       font-size: 17px;
-
       font-weight: bold;
 
     }
-
 
     .boton-pago:disabled {
 
@@ -902,11 +736,6 @@
 
     }
 
-
-    /* ===================================================== */
-    /* ZONA VPOS                                             */
-    /* ===================================================== */
-
     #zonaPagoVpos {
 
       display: none;
@@ -915,13 +744,9 @@
 
     }
 
-
     #zonaPagoVpos.activo {
-
       display: block;
-
     }
-
 
     .pago-cabecera {
 
@@ -930,7 +755,6 @@
       margin-bottom: 20px;
 
     }
-
 
     .pago-cabecera h3 {
 
@@ -946,7 +770,6 @@
 
     }
 
-
     .pago-cabecera p {
 
       margin: 0;
@@ -957,7 +780,6 @@
       line-height: 1.5;
 
     }
-
 
     .orden-id {
 
@@ -984,7 +806,6 @@
 
     }
 
-
     #iframe-container {
 
       width: 100%;
@@ -994,7 +815,6 @@
       margin-top: 20px;
 
     }
-
 
     .cargando {
 
@@ -1006,7 +826,6 @@
         var(--texto-suave);
 
     }
-
 
     .error-box {
 
@@ -1028,7 +847,6 @@
 
     }
 
-
     .volver {
 
       width: 100%;
@@ -1048,7 +866,6 @@
 
     }
 
-
     footer {
 
       border-top:
@@ -1066,17 +883,13 @@
 
     }
 
-
     @media (
       max-width:600px
     ) {
 
       header {
-
         position: static;
-
       }
-
 
       .hero {
 
@@ -1087,26 +900,16 @@
 
       }
 
-
       .afiche {
-
         height: 470px;
-
       }
-
 
       .modal {
-
         padding: 8px;
-
       }
 
-
       .modal-caja {
-
-        margin:
-          10px 0;
-
+        margin: 10px 0;
       }
 
     }
@@ -1115,13 +918,7 @@
 
 </head>
 
-
 <body>
-
-
-<!-- ======================================================= -->
-<!-- HEADER                                                  -->
-<!-- ======================================================= -->
 
 <header>
 
@@ -1151,11 +948,6 @@
   </div>
 
 </header>
-
-
-<!-- ======================================================= -->
-<!-- HERO                                                    -->
-<!-- ======================================================= -->
 
 <section class="hero">
 
@@ -1190,11 +982,6 @@
 
 </section>
 
-
-<!-- ======================================================= -->
-<!-- CARTELERA                                               -->
-<!-- ======================================================= -->
-
 <main>
 
   <section
@@ -1214,7 +1001,6 @@
 
     </div>
 
-
     <div
       class="grid-obras"
       id="listaObras"
@@ -1225,7 +1011,6 @@
 
 </main>
 
-
 <footer>
 
   © 2026 Arkhé en Escena E.A.S.
@@ -1233,18 +1018,12 @@
 
 </footer>
 
-
-<!-- ======================================================= -->
-<!-- MODAL                                                   -->
-<!-- ======================================================= -->
-
 <div
   class="modal"
   id="modalCompra"
 >
 
   <div class="modal-caja">
-
 
     <div class="modal-cabecera">
 
@@ -1259,7 +1038,6 @@
 
       </div>
 
-
       <button
         class="cerrar"
         type="button"
@@ -1270,13 +1048,7 @@
 
     </div>
 
-
-    <!-- =================================================== -->
-    <!-- DATOS DEL COMPRADOR                                 -->
-    <!-- =================================================== -->
-
     <form id="formCompra">
-
 
       <div class="campo">
 
@@ -1292,16 +1064,13 @@
 
       </div>
 
-
       <div class="campo">
 
         <label>
           Cantidad de entradas
         </label>
 
-
         <div class="cantidad-control">
-
 
           <button
             type="button"
@@ -1309,7 +1078,6 @@
           >
             −
           </button>
-
 
           <input
             id="cantidad"
@@ -1320,7 +1088,6 @@
             readonly
           >
 
-
           <button
             type="button"
             onclick="cambiarCantidad(1)"
@@ -1328,11 +1095,9 @@
             +
           </button>
 
-
         </div>
 
       </div>
-
 
       <div class="campo">
 
@@ -1350,7 +1115,6 @@
 
       </div>
 
-
       <div class="campo">
 
         <label for="correo">
@@ -1366,7 +1130,6 @@
         >
 
       </div>
-
 
       <div class="campo">
 
@@ -1384,9 +1147,7 @@
 
       </div>
 
-
       <div class="resumen">
-
 
         <div class="resumen-linea">
 
@@ -1398,7 +1159,6 @@
           </strong>
 
         </div>
-
 
         <div class="resumen-linea">
 
@@ -1412,7 +1172,6 @@
 
         </div>
 
-
         <div class="resumen-total">
 
           <strong>
@@ -1424,9 +1183,7 @@
 
         </div>
 
-
       </div>
-
 
       <label class="terminos">
 
@@ -1438,16 +1195,13 @@
 
         <span>
 
-          Confirmo que los datos
-          ingresados son correctos
-          y acepto las condiciones
-          de compra de
-          Arkhé en Escena.
+          Confirmo que los datos ingresados
+          son correctos y acepto las condiciones
+          de compra de Arkhé en Escena.
 
         </span>
 
       </label>
-
 
       <button
         class="boton-pago"
@@ -1456,16 +1210,9 @@
         CONTINUAR AL PAGO
       </button>
 
-
     </form>
 
-
-    <!-- =================================================== -->
-    <!-- VPOS                                                -->
-    <!-- =================================================== -->
-
     <div id="zonaPagoVpos">
-
 
       <div class="pago-cabecera">
 
@@ -1474,9 +1221,8 @@
         </h3>
 
         <p>
-          Completá el pago
-          utilizando la plataforma
-          segura de Bancard.
+          Completá el pago utilizando
+          la plataforma segura de Bancard.
         </p>
 
         <div
@@ -1487,7 +1233,6 @@
 
       </div>
 
-
       <div
         class="cargando"
         id="cargandoPago"
@@ -1495,17 +1240,14 @@
         Preparando pago seguro...
       </div>
 
-
       <div id="iframe-container">
       </div>
-
 
       <div
         class="error-box"
         id="errorPago"
       >
       </div>
-
 
       <button
         type="button"
@@ -1515,22 +1257,13 @@
         Volver
       </button>
 
-
     </div>
-
 
   </div>
 
 </div>
 
-
 <script>
-
-
-/* ========================================================= */
-/* CONFIGURACIÓN                                             */
-/* ========================================================= */
-
 
 const APPS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxdolseTUIwquadoVA6tbpJylodga1yumS_iu5MrFevEh6sNYYaQkTLTs_P-BbgcNoC-A/exec";
@@ -1538,17 +1271,6 @@ const APPS_SCRIPT_URL =
 
 const VPOS_WORKER_URL =
   "https://arkhe-tpago.waltermersproduccion.workers.dev";
-
-
-/*
-  IMPORTANTE:
-
-  Este es STAGING.
-
-  El monto actual se puede cambiar abajo.
-
-  Para pruebas podés poner 10000.
-*/
 
 
 const OBRAS = [
@@ -1569,14 +1291,6 @@ const OBRAS = [
 
     precio:
       10000,
-
-    /*
-      Para prueba:
-      10000 = G. 10.000
-
-      Después ponemos
-      el precio real.
-    */
 
     imagen:
       "",
@@ -1600,11 +1314,6 @@ let cantidadActual =
   1;
 
 
-/* ========================================================= */
-/* FORMATO GUARANÍES                                         */
-/* ========================================================= */
-
-
 function guaranies(numero) {
 
   return "G. " +
@@ -1616,13 +1325,7 @@ function guaranies(numero) {
 }
 
 
-/* ========================================================= */
-/* CARTELERA                                                 */
-/* ========================================================= */
-
-
 function cargarCartelera() {
-
 
   const contenedor =
     document
@@ -1630,14 +1333,11 @@ function cargarCartelera() {
         "listaObras"
       );
 
-
   contenedor.innerHTML =
     "";
 
-
   OBRAS.forEach(
     function(obra) {
-
 
       const tarjeta =
         document
@@ -1645,18 +1345,14 @@ function cargarCartelera() {
             "article"
           );
 
-
       tarjeta.className =
         "obra";
 
-
       let afiche;
-
 
       if (
         obra.imagen
       ) {
-
 
         afiche =
 
@@ -1670,9 +1366,7 @@ function cargarCartelera() {
 
           '</div>';
 
-
       } else {
-
 
         afiche =
 
@@ -1687,7 +1381,6 @@ function cargarCartelera() {
           '</div>';
 
       }
-
 
       tarjeta.innerHTML =
 
@@ -1727,7 +1420,6 @@ function cargarCartelera() {
 
         '</div>';
 
-
       tarjeta
         .querySelector(
           ".obra-boton"
@@ -1746,7 +1438,6 @@ function cargarCartelera() {
 
         );
 
-
       contenedor
         .appendChild(
           tarjeta
@@ -1759,15 +1450,9 @@ function cargarCartelera() {
 }
 
 
-/* ========================================================= */
-/* ABRIR COMPRA                                              */
-/* ========================================================= */
-
-
 function abrirCompra(
   idObra
 ) {
-
 
   obraActual =
     OBRAS.find(
@@ -1782,7 +1467,6 @@ function abrirCompra(
 
     );
 
-
   if (
     !obraActual
   ) {
@@ -1791,10 +1475,8 @@ function abrirCompra(
 
   }
 
-
   cantidadActual =
     1;
-
 
   document
     .getElementById(
@@ -1803,17 +1485,14 @@ function abrirCompra(
     .textContent =
       obraActual.titulo;
 
-
   const selector =
     document
       .getElementById(
         "funcion"
       );
 
-
   selector.innerHTML =
     "";
-
 
   obraActual
     .funciones
@@ -1821,21 +1500,17 @@ function abrirCompra(
 
       function(funcion) {
 
-
         const opcion =
           document
             .createElement(
               "option"
             );
 
-
         opcion.value =
           funcion;
 
-
         opcion.textContent =
           funcion;
-
 
         selector
           .appendChild(
@@ -1846,7 +1521,6 @@ function abrirCompra(
 
     );
 
-
   document
     .getElementById(
       "cantidad"
@@ -1854,14 +1528,12 @@ function abrirCompra(
     .value =
       1;
 
-
   document
     .getElementById(
       "formCompra"
     )
     .style.display =
       "block";
-
 
   document
     .getElementById(
@@ -1872,12 +1544,9 @@ function abrirCompra(
       "activo"
     );
 
-
   limpiarPago();
 
-
   actualizarTotal();
-
 
   document
     .getElementById(
@@ -1888,20 +1557,13 @@ function abrirCompra(
       "activo"
     );
 
-
   document.body.style.overflow =
     "hidden";
 
 }
 
 
-/* ========================================================= */
-/* CERRAR                                                    */
-/* ========================================================= */
-
-
 function cerrarCompra() {
-
 
   document
     .getElementById(
@@ -1912,10 +1574,8 @@ function cerrarCompra() {
       "activo"
     );
 
-
   document.body.style.overflow =
     "";
-
 
   document
     .getElementById(
@@ -1923,29 +1583,20 @@ function cerrarCompra() {
     )
     .reset();
 
-
   cantidadActual =
     1;
-
 
   limpiarPago();
 
 }
 
 
-/* ========================================================= */
-/* CANTIDAD                                                  */
-/* ========================================================= */
-
-
 function cambiarCantidad(
   cambio
 ) {
 
-
   cantidadActual +=
     cambio;
-
 
   if (
     cantidadActual < 1
@@ -1956,7 +1607,6 @@ function cambiarCantidad(
 
   }
 
-
   if (
     cantidadActual > 10
   ) {
@@ -1966,7 +1616,6 @@ function cambiarCantidad(
 
   }
 
-
   document
     .getElementById(
       "cantidad"
@@ -1974,19 +1623,12 @@ function cambiarCantidad(
     .value =
       cantidadActual;
 
-
   actualizarTotal();
 
 }
 
 
-/* ========================================================= */
-/* TOTAL                                                     */
-/* ========================================================= */
-
-
 function actualizarTotal() {
-
 
   if (
     !obraActual
@@ -1996,11 +1638,9 @@ function actualizarTotal() {
 
   }
 
-
   const total =
     obraActual.precio *
     cantidadActual;
-
 
   document
     .getElementById(
@@ -2011,14 +1651,12 @@ function actualizarTotal() {
         obraActual.precio
       );
 
-
   document
     .getElementById(
       "resumenCantidad"
     )
     .textContent =
       cantidadActual;
-
 
   document
     .getElementById(
@@ -2032,13 +1670,7 @@ function actualizarTotal() {
 }
 
 
-/* ========================================================= */
-/* LIMPIAR VPOS                                              */
-/* ========================================================= */
-
-
 function limpiarPago() {
-
 
   document
     .getElementById(
@@ -2047,7 +1679,6 @@ function limpiarPago() {
     .innerHTML =
       "";
 
-
   document
     .getElementById(
       "cargandoPago"
@@ -2055,21 +1686,17 @@ function limpiarPago() {
     .style.display =
       "none";
 
-
   const error =
     document
       .getElementById(
         "errorPago"
       );
 
-
   error.style.display =
     "none";
 
-
   error.textContent =
     "";
-
 
   document
     .getElementById(
@@ -2081,16 +1708,9 @@ function limpiarPago() {
 }
 
 
-/* ========================================================= */
-/* VOLVER                                                    */
-/* ========================================================= */
-
-
 function volverFormulario() {
 
-
   limpiarPago();
-
 
   document
     .getElementById(
@@ -2101,7 +1721,6 @@ function volverFormulario() {
       "activo"
     );
 
-
   document
     .getElementById(
       "formCompra"
@@ -2110,11 +1729,6 @@ function volverFormulario() {
       "block";
 
 }
-
-
-/* ========================================================= */
-/* CREAR COMPRA                                              */
-/* ========================================================= */
 
 
 document
@@ -2127,10 +1741,8 @@ document
 
     async function(event) {
 
-
       event
         .preventDefault();
-
 
       if (
         !obraActual
@@ -2140,7 +1752,6 @@ document
 
       }
 
-
       const nombre =
         document
           .getElementById(
@@ -2148,7 +1759,6 @@ document
           )
           .value
           .trim();
-
 
       const correo =
         document
@@ -2158,7 +1768,6 @@ document
           .value
           .trim();
 
-
       const whatsapp =
         document
           .getElementById(
@@ -2167,14 +1776,12 @@ document
           .value
           .trim();
 
-
       const funcion =
         document
           .getElementById(
             "funcion"
           )
           .value;
-
 
       if (
 
@@ -2188,58 +1795,45 @@ document
 
       ) {
 
-
         alert(
           "Completá todos los datos antes de continuar."
         );
-
 
         return;
 
       }
 
-
       const total =
         obraActual.precio *
         cantidadActual;
 
-
       const orden = {
-
 
         obra:
           obraActual.id,
 
-
         titulo:
           obraActual.titulo,
-
 
         funcion:
           funcion,
 
-
         cantidad:
           cantidadActual,
-
 
         nombre:
           nombre,
 
-
         correo:
           correo,
 
-
         whatsapp:
           whatsapp,
-
 
         total:
           total
 
       };
-
 
       const botonPago =
         document
@@ -2247,22 +1841,13 @@ document
             ".boton-pago"
           );
 
-
       botonPago.disabled =
         true;
-
 
       botonPago.textContent =
         "CREANDO ORDEN...";
 
-
       try {
-
-
-        /* =============================================== */
-        /* 1. CREAR ORDEN EN APPS SCRIPT                  */
-        /* =============================================== */
-
 
         const respuestaOrden =
           await fetch(
@@ -2290,7 +1875,6 @@ document
 
           );
 
-
         if (
           !respuestaOrden.ok
         ) {
@@ -2301,11 +1885,9 @@ document
 
         }
 
-
         const datosOrden =
           await respuestaOrden
             .json();
-
 
         if (
           !datosOrden.ok
@@ -2321,15 +1903,21 @@ document
 
         }
 
-
         const idOrden =
           datosOrden.idOrden;
 
+        const shopProcessId =
+          datosOrden.shop_process_id;
 
-        /* =============================================== */
-        /* 2. MOSTRAR ZONA DE PAGO                         */
-        /* =============================================== */
+        if (
+          !shopProcessId
+        ) {
 
+          throw new Error(
+            "Apps Script no devolvió shop_process_id."
+          );
+
+        }
 
         document
           .getElementById(
@@ -2337,7 +1925,6 @@ document
           )
           .style.display =
             "none";
-
 
         document
           .getElementById(
@@ -2348,7 +1935,6 @@ document
             "activo"
           );
 
-
         document
           .getElementById(
             "ordenMostrada"
@@ -2357,19 +1943,12 @@ document
             "Orden: " +
             idOrden;
 
-
         document
           .getElementById(
             "cargandoPago"
           )
           .style.display =
             "block";
-
-
-        /* =============================================== */
-        /* 3. CREAR SINGLE BUY EN VPOS                     */
-        /* =============================================== */
-
 
         const respuestaVpos =
           await fetch(
@@ -2401,6 +1980,9 @@ document
                   order_id:
                     idOrden,
 
+                  shop_process_id:
+                    shopProcessId,
+
                   return_url:
                     window.location.href,
 
@@ -2413,17 +1995,14 @@ document
 
           );
 
-
         const datosVpos =
           await respuestaVpos
             .json();
-
 
         console.log(
           "Respuesta vPOS:",
           datosVpos
         );
-
 
         if (
           !respuestaVpos.ok
@@ -2445,7 +2024,6 @@ document
 
         }
 
-
         if (
 
           !datosVpos.vpos ||
@@ -2458,7 +2036,6 @@ document
 
         ) {
 
-
           throw new Error(
 
             "Bancard no devolvió un process_id válido."
@@ -2467,17 +2044,10 @@ document
 
         }
 
-
         const processId =
           datosVpos
             .vpos
             .process_id;
-
-
-        /* =============================================== */
-        /* 4. LEVANTAR IFRAME                              */
-        /* =============================================== */
-
 
         document
           .getElementById(
@@ -2486,14 +2056,12 @@ document
           .style.display =
             "none";
 
-
         document
           .getElementById(
             "iframe-container"
           )
           .innerHTML =
             "";
-
 
         const estilosVpos = {
 
@@ -2520,7 +2088,6 @@ document
 
         };
 
-
         Bancard
           .Checkout
           .createForm(
@@ -2533,16 +2100,13 @@ document
 
           );
 
-
       } catch (
         error
       ) {
 
-
         console.error(
           error
         );
-
 
         const errorBox =
           document
@@ -2550,15 +2114,12 @@ document
               "errorPago"
             );
 
-
         errorBox.style.display =
           "block";
-
 
         errorBox.textContent =
           "No se pudo iniciar el pago: " +
           error.message;
-
 
         document
           .getElementById(
@@ -2567,13 +2128,10 @@ document
           .style.display =
             "none";
 
-
       } finally {
-
 
         botonPago.disabled =
           false;
-
 
         botonPago.textContent =
           "CONTINUAR AL PAGO";
@@ -2585,11 +2143,6 @@ document
   );
 
 
-/* ========================================================= */
-/* CERRAR HACIENDO CLICK AFUERA                              */
-/* ========================================================= */
-
-
 document
   .getElementById(
     "modalCompra"
@@ -2599,7 +2152,6 @@ document
     "click",
 
     function(event) {
-
 
       if (
         event.target === this
@@ -2614,17 +2166,9 @@ document
   );
 
 
-/* ========================================================= */
-/* INICIAR                                                   */
-/* ========================================================= */
-
-
 cargarCartelera();
-
 
 </script>
 
-
 </body>
-
 </html>
