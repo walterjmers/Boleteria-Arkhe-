@@ -1066,7 +1066,7 @@
 
       <div class="campo">
 
-        <label>
+        <label for="cantidad">
           Cantidad de entradas
         </label>
 
@@ -1290,7 +1290,7 @@ const OBRAS = [
       "20:00",
 
     precio:
-      10000,
+      70000,
 
     imagen:
   "Afiche de niietzsch.jpeg",
@@ -1306,6 +1306,14 @@ const OBRAS = [
 ];
 
 
+const OPCIONES = [
+  { id: "anticipada", nombre: "Entrada anticipada", cantidad: 1, precio: 70000, total: 70000, boton: "COMPRAR ENTRADA" },
+  { id: "promo-doble", nombre: "Promo 2 entradas", cantidad: 2, precio: 60000, total: 120000, boton: "COMPRAR 2 ENTRADAS" }
+];
+
+const RETURN_URL = "https://entradas.arkheenescena.com/";
+let opcionActual = null;
+
 let obraActual =
   null;
 
@@ -1316,7 +1324,7 @@ let cantidadActual =
 
 function guaranies(numero) {
 
-  return "G. " +
+  return "Gs. " +
     Number(numero)
       .toLocaleString(
         "es-PY"
@@ -1336,122 +1344,33 @@ function cargarCartelera() {
   contenedor.innerHTML =
     "";
 
-  OBRAS.forEach(
-    function(obra) {
-
-      const tarjeta =
-        document
-          .createElement(
-            "article"
-          );
-
-      tarjeta.className =
-        "obra";
-
-      let afiche;
-
-      if (
-        obra.imagen
-      ) {
-
-        afiche =
-
-          '<div class="afiche">' +
-
-            '<img src="' +
-            obra.imagen +
-            '" alt="' +
-            obra.titulo +
-            '">' +
-
-          '</div>';
-
-      } else {
-
-        afiche =
-
-          '<div class="afiche">' +
-
-            '<div class="afiche-placeholder">' +
-
-              obra.titulo +
-
-            '</div>' +
-
-          '</div>';
-
-      }
-
+  OBRAS.forEach(function(obra) {
+    OPCIONES.forEach(function(opcion) {
+      const tarjeta = document.createElement("article");
+      tarjeta.className = "obra";
+      if (opcion.id === "promo-doble") tarjeta.style.borderColor = "var(--dorado)";
       tarjeta.innerHTML =
-
-        afiche +
-
+        '<div class="afiche"><img src="' + obra.imagen + '" alt="' + obra.titulo + '"></div>' +
         '<div class="obra-contenido">' +
-
-          '<h3>' +
-            obra.titulo +
-          '</h3>' +
-
-          '<div class="obra-meta">' +
-
-            obra.lugar +
-
-            '<br>' +
-
-            obra.hora +
-
-            ' h' +
-
-          '</div>' +
-
-          '<div class="obra-precio">' +
-
-            guaranies(
-              obra.precio
-            ) +
-
-          '</div>' +
-
-          '<button class="obra-boton">' +
-
-            'COMPRAR ENTRADAS' +
-
-          '</button>' +
-
+          '<h3>' + opcion.nombre + '</h3>' +
+          '<div class="obra-meta">' + obra.titulo + '<br>' +
+            obra.funciones.join(" · ") + ' · ' + obra.hora + ' h<br>' + obra.lugar + '<br>' +
+            'Acceso para ' + opcion.cantidad + (opcion.cantidad === 1 ? ' persona.' : ' personas.') + '</div>' +
+          '<div class="obra-precio">' + guaranies(opcion.total) + '</div>' +
+          (opcion.id === "promo-doble" ? '<p class="obra-meta">Ahorrás Gs. 20.000 por par.</p>' : '') +
+          '<button type="button" class="obra-boton">' + opcion.boton + '</button>' +
         '</div>';
-
-      tarjeta
-        .querySelector(
-          ".obra-boton"
-        )
-        .addEventListener(
-
-          "click",
-
-          function() {
-
-            abrirCompra(
-              obra.id
-            );
-
-          }
-
-        );
-
-      contenedor
-        .appendChild(
-          tarjeta
-        );
-
-    }
-
-  );
-
+      tarjeta.querySelector(".obra-boton").addEventListener("click", function() {
+        abrirCompra(obra.id, opcion.id);
+      });
+      contenedor.appendChild(tarjeta);
+    });
+  });
 }
 
 
 function abrirCompra(
-  idObra
+  idObra, idOpcion
 ) {
 
   obraActual =
@@ -1475,15 +1394,19 @@ function abrirCompra(
 
   }
 
-  cantidadActual =
-    1;
+  opcionActual = OPCIONES.find(function(opcion) { return opcion.id === idOpcion; });
+  if (!opcionActual) return;
+  cantidadActual = opcionActual.cantidad;
+  const cantidadInput = document.getElementById("cantidad");
+  cantidadInput.min = opcionActual.cantidad;
+  cantidadInput.step = opcionActual.cantidad;
 
   document
     .getElementById(
       "modalTitulo"
     )
     .textContent =
-      obraActual.titulo;
+      obraActual.titulo + " — " + opcionActual.nombre;
 
   const selector =
     document
@@ -1526,7 +1449,7 @@ function abrirCompra(
       "cantidad"
     )
     .value =
-      1;
+      cantidadActual;
 
   document
     .getElementById(
@@ -1595,26 +1518,9 @@ function cambiarCantidad(
   cambio
 ) {
 
-  cantidadActual +=
-    cambio;
-
-  if (
-    cantidadActual < 1
-  ) {
-
-    cantidadActual =
-      1;
-
-  }
-
-  if (
-    cantidadActual > 10
-  ) {
-
-    cantidadActual =
-      10;
-
-  }
+  if (!opcionActual) return;
+  cantidadActual = Math.max(opcionActual.cantidad,
+    Math.min(10, cantidadActual + cambio * opcionActual.cantidad));
 
   document
     .getElementById(
@@ -1639,7 +1545,7 @@ function actualizarTotal() {
   }
 
   const total =
-    obraActual.precio *
+    opcionActual.precio *
     cantidadActual;
 
   document
@@ -1648,7 +1554,7 @@ function actualizarTotal() {
     )
     .textContent =
       guaranies(
-        obraActual.precio
+        opcionActual.precio
       );
 
   document
@@ -1804,7 +1710,7 @@ document
       }
 
       const total =
-        obraActual.precio *
+        opcionActual.precio *
         cantidadActual;
 
       const orden = {
@@ -1984,10 +1890,10 @@ document
                     shopProcessId,
 
                   return_url:
-                    window.location.href,
+                    RETURN_URL,
 
                   cancel_url:
-                    window.location.href
+                    RETURN_URL
 
                 })
 
@@ -2108,6 +2014,8 @@ document
           error
         );
 
+        document.getElementById("formCompra").style.display = "none";
+        document.getElementById("zonaPagoVpos").classList.add("activo");
         const errorBox =
           document
             .getElementById(
