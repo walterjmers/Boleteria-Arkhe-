@@ -914,6 +914,13 @@
 
     }
 
+    .codigo-control { display: flex; gap: 8px; }
+    .codigo-control input { flex: 1; min-width: 0; text-transform: uppercase; }
+    .codigo-control button { border: 1px solid var(--dorado); border-radius: 8px; background: var(--dorado); color: #111; padding: 0 16px; font-weight: bold; }
+    .codigo-mensaje { color: var(--texto-suave); font-size: 13px; line-height: 1.5; margin: 8px 0 0; }
+    .codigo-mensaje.aplicado, .descuento-aplicado { color: var(--dorado-claro); }
+    .codigo-mensaje.error { color: #ffd9d6; }
+    [hidden] { display: none !important; }
   </style>
 
 </head>
@@ -1147,6 +1154,15 @@
 
       </div>
 
+      <div class="campo">
+        <label for="codigoDescuento">Código de descuento</label>
+        <div class="codigo-control">
+          <input id="codigoDescuento" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="mensajeDescuento" placeholder="Ingresá tu código">
+          <button id="aplicarDescuento" type="button">Aplicar</button>
+        </div>
+        <p id="mensajeDescuento" class="codigo-mensaje" role="status" aria-live="polite">Los códigos aplican un 12% únicamente sobre la entrada anticipada.</p>
+      </div>
+
       <div class="resumen">
 
         <div class="resumen-linea">
@@ -1170,6 +1186,11 @@
             1
           </strong>
 
+        </div>
+
+        <div class="resumen-linea descuento-aplicado" id="filaDescuento" hidden>
+          <span id="etiquetaDescuento">Descuento (12%)</span>
+          <strong id="montoDescuento"></strong>
         </div>
 
         <div class="resumen-total">
@@ -1314,6 +1335,60 @@ const OPCIONES = [
 
 const RETURN_URL = "https://entradas.arkheenescena.com/";
 let opcionActual = null;
+const CODIGOS_DESCUENTO = new Set([
+  "EL_ESTUDIO", "TIA_ESTUDIANTES", "CIF_FIL", "UCA_FIL", "INV_ARKHE"
+]);
+let codigoAplicado = "";
+
+function calcularImportes() {
+  const subtotal = opcionActual.precio * cantidadActual;
+  const descuento = opcionActual.id === "anticipada" && CODIGOS_DESCUENTO.has(codigoAplicado)
+    ? Math.round(subtotal * 12 / 100) : 0;
+  return { subtotal, descuento, total: subtotal - descuento };
+}
+
+function mensajeDescuento(texto, estado) {
+  const mensaje = document.getElementById("mensajeDescuento");
+  mensaje.textContent = texto;
+  mensaje.className = "codigo-mensaje" + (estado ? " " + estado : "");
+}
+
+function reiniciarDescuento() {
+  codigoAplicado = "";
+  document.getElementById("codigoDescuento").value = "";
+  mensajeDescuento(opcionActual && opcionActual.id === "promo-doble"
+    ? "La promo de 2 entradas no admite códigos de descuento."
+    : "Los códigos aplican un 12% únicamente sobre la entrada anticipada.");
+}
+
+function aplicarDescuento() {
+  if (!opcionActual) return;
+  const campo = document.getElementById("codigoDescuento");
+  const codigo = campo.value.trim().toUpperCase();
+  campo.value = codigo;
+  codigoAplicado = "";
+  if (opcionActual.id !== "anticipada") {
+    mensajeDescuento("La promo de 2 entradas no admite códigos de descuento.", "error");
+  } else if (!CODIGOS_DESCUENTO.has(codigo)) {
+    mensajeDescuento(codigo ? "Código no válido. Revisalo y volvé a aplicar." : "Ingresá un código de descuento.", "error");
+  } else {
+    codigoAplicado = codigo;
+    mensajeDescuento("Código " + codigo + " aplicado: 12% de descuento. Cada entrada queda en " + guaranies(61600) + ".", "aplicado");
+  }
+  actualizarTotal();
+}
+
+document.getElementById("aplicarDescuento").addEventListener("click", aplicarDescuento);
+document.getElementById("codigoDescuento").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") { event.preventDefault(); aplicarDescuento(); }
+});
+document.getElementById("codigoDescuento").addEventListener("input", function() {
+  if (codigoAplicado) {
+    codigoAplicado = "";
+    mensajeDescuento("Código modificado. Presioná Aplicar para confirmar el descuento.");
+    actualizarTotal();
+  }
+});
 
 let obraActual =
   null;
@@ -1398,6 +1473,7 @@ function abrirCompra(
   opcionActual = OPCIONES.find(function(opcion) { return opcion.id === idOpcion; });
   if (!opcionActual) return;
   cantidadActual = opcionActual.cantidad;
+  reiniciarDescuento();
   const cantidadInput = document.getElementById("cantidad");
   cantidadInput.min = opcionActual.cantidad;
   cantidadInput.step = opcionActual.cantidad;
@@ -1545,9 +1621,10 @@ function actualizarTotal() {
 
   }
 
-  const total =
-    opcionActual.precio *
-    cantidadActual;
+  const { total, descuento } = calcularImportes();
+  document.getElementById("filaDescuento").hidden = descuento === 0;
+  document.getElementById("etiquetaDescuento").textContent = "Descuento " + codigoAplicado + " (12%)";
+  document.getElementById("montoDescuento").textContent = "− " + guaranies(descuento);
 
   document
     .getElementById(
@@ -1710,9 +1787,7 @@ document
 
       }
 
-      const total =
-        opcionActual.precio *
-        cantidadActual;
+      const { total, descuento } = calcularImportes();
 
       const orden = {
 
@@ -1738,7 +1813,11 @@ document
           whatsapp,
 
         total:
-          total
+          total,
+
+        // Metadatos enviados a Apps Script; su validación/registro depende del backend existente.
+        codigoDescuento: descuento > 0 ? codigoAplicado : "",
+        montoDescuento: descuento
 
       };
 
