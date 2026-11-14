@@ -921,6 +921,30 @@
     .codigo-mensaje.aplicado, .descuento-aplicado { color: var(--dorado-claro); }
     .codigo-mensaje.error { color: #ffd9d6; }
     [hidden] { display: none !important; }
+    .whatsapp-arkhe {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      color: #fff;
+      background: #126b43;
+      font: 600 14px system-ui, sans-serif;
+      text-decoration: none;
+    }
+    .whatsapp-arkhe:focus-visible { outline: 3px solid #c59a56; outline-offset: 3px; }
+    .whatsapp-fijo {
+      position: fixed;
+      right: 16px;
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+      z-index: 110;
+    }
+    #ventanaPagoConfirmado .acciones-aviso {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
   </style>
 
 </head>
@@ -999,7 +1023,7 @@
     style="width:min(90%,480px);margin:auto;padding:26px;border:1px solid #c59a56;border-radius:12px;background:#201910;color:#f6e8cc">
     <h2 id="tituloPagoConfirmado">Compra exitosa</h2>
     <p id="mensajePagoConfirmado"></p>
-    <form method="dialog"><button type="submit" autofocus>Cerrar</button></form>
+    <div class="acciones-aviso"><form method="dialog"><button type="submit" autofocus>Cerrar</button></form><a class="whatsapp-arkhe " href="https://wa.me/595994430466" target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a></div>
   </dialog>
 
   <section
@@ -2226,8 +2250,8 @@ async function revisarEstadoCompra(compraActual) {
       if (estado.ok && estado.estado === "PAGADO") {
 
         aviso.textContent = estado.enviada
-          ? "Pago confirmado. Ya enviamos tu entrada al correo que ingresaste. Revisá también Spam."
-          : "Pago confirmado. Tu entrada debería llegar por correo en unos minutos. Revisá también Spam.";
+          ? "Ya enviamos tu entrada digital al correo registrado. Si no la encontrás, revisá Spam o comunicate al 0994430466."
+          : "Tu entrada digital debería llegar al correo registrado en los próximos 5 minutos. Si no la recibís, revisá Spam o comunicate al 0994430466.";
         document.getElementById("mensajePagoConfirmado").textContent = aviso.textContent;
         if (!confirmado && typeof ventana.showModal === "function" && !ventana.open) {
           ventana.showModal();
@@ -2252,5 +2276,6 @@ revisarEstadoCompra();
 
 </script>
 
+<a class="whatsapp-arkhe whatsapp-fijo" href="https://wa.me/595994430466" target="_blank" rel="noopener noreferrer">Ayuda por WhatsApp</a>
 </body>
 </html>
