@@ -2087,15 +2087,16 @@ document
 
         };
 
+        let seguimientoPago;
         if (datosOrden.claveEstado) {
-          try {
-            const seguimiento = JSON.stringify({
+          seguimientoPago = {
               orden: idOrden,
               pedido: String(shopProcessId),
               clave: datosOrden.claveEstado,
               creado: Date.now()
-            });
-            localStorage.setItem("arkhe.seguimientoCompra", seguimiento);
+          };
+          try {
+            localStorage.setItem("arkhe.seguimientoCompra", JSON.stringify(seguimientoPago));
           } catch (error) {
             console.warn("El navegador no permite guardar el seguimiento de la compra.");
           }
@@ -2112,6 +2113,7 @@ document
             estilosVpos
 
           );
+        if (seguimientoPago) revisarEstadoCompra(seguimientoPago);
 
       } catch (
         error
@@ -2183,17 +2185,23 @@ document
 
 cargarCartelera();
 
-async function revisarEstadoCompra() {
-  // La URL fija de Bancard vuelve a la portada, incluso dentro del formulario.
+let revisionPagoActual = 0;
+
+async function revisarEstadoCompra(compraActual) {
+  // La página principal vigila el pago, incluso si Bancard vuelve dentro del iframe.
   const aviso = document.getElementById("avisoCompra");
-  let compra;
-  try {
-    compra = JSON.parse(localStorage.getItem("arkhe.seguimientoCompra"));
-  } catch {
-    return;
+  let compra = compraActual;
+  if (!compra) {
+    if (window.self !== window.top) return;
+    try {
+      compra = JSON.parse(localStorage.getItem("arkhe.seguimientoCompra"));
+    } catch {
+      return;
+    }
   }
   if (!compra || Date.now() - compra.creado > 24 * 60 * 60 * 1000) return;
 
+  const revision = ++revisionPagoActual;
   aviso.hidden = false;
   aviso.textContent = "Estamos verificando tu pago con Bancard.";
   const consulta = new URL(APPS_SCRIPT_URL);
@@ -2205,7 +2213,7 @@ async function revisarEstadoCompra() {
   };
   let confirmado = false;
   const ventana = document.getElementById("ventanaPagoConfirmado");
-  for (let intento = 0; intento < 45; intento++) {
+  for (let intento = 0; intento < 90 && revision === revisionPagoActual; intento++) {
     try {
       const respuesta = await fetch(consulta, {
         method: "POST",
@@ -2214,6 +2222,7 @@ async function revisarEstadoCompra() {
         body: JSON.stringify(datosConsulta)
       });
       const estado = await respuesta.json();
+      if (revision !== revisionPagoActual) return;
       if (estado.ok && estado.estado === "PAGADO") {
 
         aviso.textContent = estado.enviada
@@ -2234,7 +2243,7 @@ async function revisarEstadoCompra() {
     }
     await new Promise(resolve => setTimeout(resolve, 10000));
   }
-  if (!confirmado) {
+  if (!confirmado && revision === revisionPagoActual) {
     aviso.textContent = "Todavía no pudimos confirmar el pago. Si Bancard ya te mostró un cobro, conservá el comprobante y consultá a Arkhé.";
   }
 }
