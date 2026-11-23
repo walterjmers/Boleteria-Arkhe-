@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#17241e">
+  <meta name="description" content="Libros, lámparas y esculturas para acompañar tus lecturas. Tienda Arkhé en Escena.">
+  <title>Tienda | Arkhé en Escena</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://vpos.infonet.com.py/checkout/javascript/dist/bancard-checkout-4.0.0.js" defer></script>
+  <script type="module" src="tienda.js"></script>
+</head>
+<body>
+  <header class="cabecera">
+    <a class="marca" href="https://www.arkheenescena.com/" aria-label="Arkhé en Escena, inicio">ARKHÉ<span>EN ESCENA</span></a>
+    <nav aria-label="Principal">
+      <a href="#coleccion">La colección</a>
+      <button id="abrirCarrito" class="carrito-boton">Tu selección <span id="cuenta">0</span></button>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-texto">
+        <p class="ceja">LA TIENDA DE ARKHÉ</p>
+        <h1>Objetos para<br>habitar tus<br><em>lecturas.</em></h1>
+        <p class="introduccion">Libros que abren preguntas. Piezas que las mantienen cerca.</p>
+        <a class="boton boton-claro" href="#coleccion">Explorar la colección</a>
+      </div>
+      <div class="hero-foto"><img src="assets/noches-blancas.jpg" alt="Lámpara Noches blancas con Dostoievski joven sentado leyendo" fetchpriority="high"><span>Noches blancas · Lámpara escultórica</span></div>
+    </section>
+    <section class="coleccion" id="coleccion">
+      <div class="encabezado-coleccion"><div><p class="ceja">ELEGIDOS PARA VOS</p><h2>Entre páginas y objetos.</h2></div>
+        <div class="filtros" role="group" aria-label="Filtrar colección">
+          <button data-filtro="Todos" aria-pressed="true">Todo</button><button data-filtro="Libros" aria-pressed="false">Libros</button><button data-filtro="Objetos" aria-pressed="false">Objetos</button>
+        </div>
+      </div>
+      <p id="estadoCatalogo" class="estado" role="status"></p>
+      <div id="productos" class="productos"></div>
+    </section>
+    <section class="entrega"><h2>Elegí cómo recibirlo.</h2><p>Retiro o delivery. Después de la compra, coordinamos tu entrega por WhatsApp.</p><a href="https://wa.me/595994430466" target="_blank" rel="noopener">Hablar con Arkhé</a></section>
+  </main>
+  <footer><a class="marca" href="https://www.arkheenescena.com/">ARKHÉ<span>EN ESCENA</span></a><p>Arte, libros y objetos para seguir pensando.</p><a href="https://wa.me/595994430466" target="_blank" rel="noopener">0994 430466</a></footer>
+  <a class="ayuda" href="https://wa.me/595994430466" target="_blank" rel="noopener">Ayuda por WhatsApp</a>
+  <p id="aviso" class="toast" role="status" hidden></p>
+
+  <dialog id="detalle" class="modal detalle"><button class="cerrar" data-cerrar="detalle" aria-label="Cerrar detalle">×</button><div id="detalleContenido"></div></dialog>
+  <dialog id="carrito" class="modal panel">
+    <div class="titulo-modal"><h2>Tu selección</h2><button class="cerrar" data-cerrar="carrito" aria-label="Cerrar carrito">×</button></div>
+    <div id="lineasCarrito"></div><div class="total"><span>Total de productos</span><strong id="totalCarrito"></strong></div>
+    <button id="continuar" class="boton">Continuar con la compra</button>
+  </dialog>
+  <dialog id="compra" class="modal panel">
+    <div class="titulo-modal"><h2>Completá tu pedido</h2><button class="cerrar" data-cerrar="compra" aria-label="Cerrar compra">×</button></div>
+    <form id="formCompra">
+      <label>Nombre y apellido<input name="nombre" autocomplete="name" required maxlength="100"></label>
+      <label>Correo electrónico<input name="correo" type="email" autocomplete="email" required maxlength="150"></label>
+      <label>WhatsApp<input name="telefono" type="tel" autocomplete="tel" required maxlength="30"></label>
+      <fieldset><legend>¿Cómo preferís recibirlo?</legend><label class="radio"><input type="radio" name="entrega" value="Retiro" checked> Retiro</label><label class="radio"><input type="radio" name="entrega" value="Delivery"> Delivery</label></fieldset>
+      <p>Coordinamos los detalles de entrega por WhatsApp después de confirmar tu compra.</p>
+      <p class="resumen">Total de productos <strong id="totalCompra"></strong></p>
+      <p id="errorCompra" role="alert"></p>
+      <button id="pagar" class="boton" type="submit">Pagar con Bancard</button>
+    </form>
+  </dialog>
+  <dialog id="pago" class="modal pago">
+    <div class="titulo-modal"><h2>Pago seguro</h2><button class="cerrar" data-cerrar="pago" aria-label="Cerrar pantalla de pago">×</button></div>
+    <p id="pedidoPago"></p><div id="bancard"></div><p id="estadoPago" role="status">Esperando la confirmación de Bancard.</p><button id="volverPedido" class="boton secundario" hidden>Verificar mi pedido</button>
+  </dialog>
+  <dialog id="exito" class="modal panel"><p class="ceja">GRACIAS POR ELEGIR ARKHÉ</p><h2>Compra exitosa.</h2><p>Tu pago fue confirmado. Coordiná la entrega de tu pedido con nosotros.</p><p id="resumenExito"></p><a id="coordinar" class="boton" target="_blank" rel="noopener">Coordinar entrega por WhatsApp</a><button data-cerrar="exito" class="boton secundario">Seguir explorando</button></dialog>
+</body></html>

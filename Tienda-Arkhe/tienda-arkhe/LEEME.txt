@@ -1,0 +1,77 @@
+TIENDA ARKHÉ — GUÍA DE PUBLICACIÓN
+
+Los archivos de esta carpeta preparan la tienda para GitHub Pages.
+El cobro online necesita configurar el servidor antes de activarlo.
+
+1. CREAR EL REGISTRO DE LA TIENDA
+Creá un proyecto NUEVO en Apps Script. Copiá servidor/Tienda.gs.
+En Configuración del proyecto → Propiedades del script, agregá TIENDA_SECRET
+con un valor aleatorio de al menos 32 caracteres y guardalo.
+Ejecutá configurarTienda y aceptá permisos.
+El registro de ejecución muestra el enlace a «Tienda Arkhé — Pedidos».
+Esta función instala el envío de recibos cada cinco minutos.
+Implementá como aplicación web, ejecutar como vos y acceso a cualquier persona.
+Copiá la URL /exec de esta nueva aplicación.
+
+2. CREAR EL WORKER arkhe-tienda
+Creá un Worker nuevo en Cloudflare y pegá servidor/worker.js.
+Activá la bandera de compatibilidad nodejs_compat en Settings → Runtime.
+Si publicás por Wrangler, usá el archivo wrangler.jsonc incluido.
+Agregá estas variables:
+
+TIENDA_SCRIPT_URL: la URL /exec del paso 1.
+TIENDA_SECRET: el mismo valor del paso 1, como Secret.
+VPOS_PUBLIC_KEY: la clave pública de PRODUCCIÓN que ya usa Arkhé.
+VPOS_PRIVATE_KEY: la clave privada de PRODUCCIÓN, como Secret.
+STORE_URL: URL pública completa de la tienda, por ejemplo
+https://entradas.arkheenescena.com/tienda/
+ALLOWED_ORIGINS: https://entradas.arkheenescena.com
+Si publicás en otro dominio, usá su origen (https://dominio, sin ruta).
+Publicá y copiá la URL del nuevo Worker.
+
+3. DERIVAR LAS CONFIRMACIONES DE BANCARD
+La URL de confirmación de Bancard sigue siendo la que ya recibe tus entradas:
+https://arkhe-tpago.waltermersproduccion.workers.dev/vpos/confirm
+En arkhe-tpago agregá la variable TIENDA_WORKER_URL con la URL del Worker nuevo.
+Pegá el bloque servidor/Agregar-al-Worker-actual.txt al principio de su función
+fetch, antes de que lea el cuerpo de la solicitud. Publicá el cambio.
+Este bloque deriva los pedidos de tienda (16 dígitos) al nuevo Worker.
+Las entradas de teatro existentes usan identificadores de 13 dígitos.
+Verificá esta longitud en tu versión actual antes de publicar el bloque.
+
+4. SUBIR A GITHUB
+En config.js pegá la URL del NUEVO Worker en API_URL.
+Subí index.html, style.css, tienda.js, config.js, productos.js y la carpeta assets
+a una carpeta «tienda» de tu repositorio. Conservá sus nombres.
+La carpeta servidor es para configurar Apps Script y Cloudflare.
+La URL final debe ser exactamente la indicada en STORE_URL.
+Agregá en la web principal un enlace a esa dirección llamado «Tienda».
+
+5. VERIFICAR ANTES DE RECIBIR VENTAS
+Abrí la tienda publicada. Debe cargar stock desde el servidor.
+Probá carrito, cantidades, filtros y elección Retiro/Delivery.
+Al pagar, Bancard debe mostrar exactamente el total de productos.
+Una compra en producción genera un cargo real.
+La misma fila de PEDIDOS debe pasar a PAGADO.
+La ventana de compra confirmada debe abrir WhatsApp con el pedido y sus productos.
+El recibo se envía en la próxima revisión del activador.
+No se generan entradas ni códigos QR para productos físicos.
+
+STOCK Y PEDIDOS PENDIENTES
+El stock inicial es 3 lámparas, 3 esculturas y 5 de cada libro.
+El precio y la disponibilidad se calculan en Apps Script.
+El servidor reserva las unidades al iniciar el pago.
+Una reserva pendiente NO vence automáticamente, porque el banco puede confirmar
+el pago con demora. Revisá en Bancard los pedidos abandonados.
+Solo después de confirmar que no se pagó y que el proceso quedó cancelado,
+marcá la columna Estado pago como ANULADO para liberar esas unidades.
+Las confirmaciones PAGADO duplicadas se reconocen sin descontar dos veces.
+«Estado entrega» se actualiza manualmente al coordinar/despachar/entregar.
+
+IMÁGENES Y DATOS
+La escultura usa la reconstrucción visual aprobada en este chat. Confirmá que
+represente las piezas reales antes de abrir las ventas al público.
+Se utilizó el WhatsApp 0994 430466 con prefijo internacional 595.
+Fecha de preparación: 23 de noviembre de 2026.
+
+No se realizaron cobros, envíos de correos ni publicaciones desde este paquete.

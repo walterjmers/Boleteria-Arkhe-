@@ -1,0 +1,29 @@
+// En el Worker ACTUAL arkhe-tpago, dentro de async fetch(request, env) {
+// pegá este bloque al PRINCIPIO, antes de leer el cuerpo de la solicitud.
+// Agregá también TIENDA_WORKER_URL en sus variables con la URL de arkhe-tienda.
+//
+// La boletería existente genera shop_process_id de 13 dígitos.
+// La tienda nueva genera IDs de 16 dígitos. El resto sigue su recorrido actual.
+
+if (new URL(request.url).pathname === "/vpos/confirm" && request.method === "POST") {
+  try {
+    const avisoTienda = await request.clone().json();
+    if (/^\d{16}$/.test(String(avisoTienda.operation?.shop_process_id))) {
+      if (!env.TIENDA_WORKER_URL) {
+        return new Response(JSON.stringify({status: "error"}), {
+          status: 503, headers: {"Content-Type": "application/json"}
+        });
+      }
+      return await fetch(env.TIENDA_WORKER_URL.replace(/\/$/, "") + "/vpos/confirm", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(avisoTienda)
+      });
+    }
+  } catch (error) {
+    console.error("No se pudo derivar la confirmación de tienda:", error.message);
+    return new Response(JSON.stringify({status: "error"}), {
+      status: 500, headers: {"Content-Type": "application/json"}
+    });
+  }
+}
